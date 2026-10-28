@@ -1,0 +1,25 @@
+import { notFound } from 'next/navigation'
+import { GalleryBlock, PageIntro } from '@/components/sections'
+import { getDict, isLocale } from '@/lib/i18n'
+import { pageMeta } from '@/lib/meta'
+
+export async function generateMetadata({ params }: PageProps<'/[lang]/gallery'>) {
+  const { lang } = await params
+  if (!isLocale(lang)) return {}
+  const t = getDict(lang)
+  return pageMeta(lang, '/gallery', t.nav.gallery)
+}
+
+export default async function GalleryPage({ params }: PageProps<'/[lang]/gallery'>) {
+  const { lang } = await params
+  if (!isLocale(lang)) notFound()
+  const t = getDict(lang)
+  return (
+    <main>
+      <PageIntro kicker={t.gallery.kicker} title={t.gallery.title} />
+      <section className="section section-tight">
+        <div className="container"><GalleryBlock t={t} /></div>
+      </section>
+    </main>
+  )
+}
