@@ -35,6 +35,13 @@ export default async function BioPage({ params }: PageProps<'/[lang]/biography'>
           </article>
         </div>
       </section>
+      <section className="section bio-quote">
+        <figure className="container">
+          <blockquote className="display">“Sanat hakikatin arayışıdır.”</blockquote>
+          {lang !== 'tr' && <p className="lead">{t.bio.quote}</p>}
+          <figcaption>Azad Bedran · Medgündem, 2018</figcaption>
+        </figure>
+      </section>
       <section className="section section-dark">
         <div className="container">
           <p className="eyebrow center">{t.bio.timelineTitle}</p>

@@ -462,3 +462,10 @@ body:has(.mini-player) .show-pop { bottom: 96px; }
   body:has(.mini-player) .show-pop { bottom: 84px; }
 }
 html.menu-open .mini-player, html.menu-open .show-pop { display: none; }
+
+.bio-quote { text-align: center; background: radial-gradient(50% 80% at 50% 50%, rgba(224, 163, 94, 0.14), transparent 70%); }
+.bio-quote figure { margin: 0 auto; max-width: 900px; }
+.bio-quote blockquote { margin: 0; font-size: clamp(2.2rem, 5vw, 3.8rem); color: var(--cream); line-height: 1.15; }
+.bio-quote .lead { margin: 18px auto 0; color: var(--glow); }
+.bio-quote figcaption { margin-top: 22px; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.sub-section { margin-top: clamp(64px, 8vw, 104px); padding-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--line); }

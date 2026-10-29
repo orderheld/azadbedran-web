@@ -28,6 +28,8 @@ export function streamingPlatforms(): Platform[] {
     { id: 'youtube-music', label: 'YouTube Music', url: `https://music.youtube.com/channel/${site.youtubeChannelId}` },
     { id: 'deezer', label: 'Deezer', url: `https://www.deezer.com/artist/${site.deezerArtistId}` },
     { id: 'amazon', label: 'Amazon Music', url: 'https://music.amazon.com/artists/B01FXZXKOO/azad-bedran' },
+    { id: 'tidal', label: 'TIDAL', url: 'https://tidal.com/browse/artist/7842088' },
+    { id: 'anghami', label: 'Anghami', url: 'https://play.anghami.com/artist/1129470' },
     { id: 'shazam', label: 'Shazam', url: `https://www.shazam.com/artist/azad-bedran/${site.appleArtistId}` },
   ]
 }

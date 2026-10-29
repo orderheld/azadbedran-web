@@ -29,17 +29,20 @@ const tour = '/images/poster-kasim-2026.jpg'
 // Quellen: Tourplakat „Kasım Konserleri“ und Veranstalterplakat St. Petersburg (von Ferhat, 29.10.2026),
 // biletsirasi.com/konser/azad-bedran und izmir.art (abgerufen 28.10.2026)
 export const seedConcerts: Concert[] = [
-  { id: 11, date: '2026-11-15', time: '19:00', city: 'Sankt Petersburg', venue: 'Restoran „1001 Noç“ (1001 ночь)', address: 'Lesnoy prospekt 48', country: 'RU', ticketUrl: null, phone: '+7 981 717-60-62', poster: '/images/poster-st-petersburg-2026.jpg', soldOut: false },
+  { id: 11, date: '2026-11-15', time: '19:00', city: 'Sankt Petersburg', venue: 'Skazka Vostoka „1001 ночь“', address: 'Lesnoy prospekt 48', country: 'RU', ticketUrl: null, phone: '+7 981 717-60-62', poster: '/images/poster-st-petersburg-2026.jpg', soldOut: false },
   { id: 12, date: '2026-11-27', time: null, city: 'Paris', venue: null, address: null, country: 'FR', ticketUrl: null, phone: null, poster: tour, soldOut: false },
   { id: 13, date: '2026-11-28', time: null, city: 'Reims', venue: null, address: null, country: 'FR', ticketUrl: null, phone: null, poster: tour, soldOut: false },
   { id: 14, date: '2026-11-29', time: null, city: 'Kiel', venue: null, address: null, country: 'DE', ticketUrl: null, phone: null, poster: tour, soldOut: false },
 
   { id: 1, date: '2026-01-10', time: '21:30', city: 'Amed / Diyarbakır', venue: 'Sezai Karakoç Kültür ve Kongre Merkezi', address: null, country: 'TR', ticketUrl: null, phone: null, poster: null, soldOut: false },
+  { id: 8, date: '2025-12-14', time: '20:00', city: 'Köln', venue: 'Sartory Säle', address: 'Friesenstraße 44–48', country: 'DE', ticketUrl: null, phone: null, poster: null, soldOut: false },
   { id: 2, date: '2025-12-06', time: '21:30', city: 'İstanbul', venue: 'Trump Sahne', address: null, country: 'TR', ticketUrl: null, phone: null, poster: null, soldOut: false },
   { id: 3, date: '2025-11-21', time: '22:00', city: 'Adana', venue: 'Yaşar Kemal Kültür Merkezi', address: null, country: 'TR', ticketUrl: null, phone: null, poster: null, soldOut: false },
   { id: 4, date: '2025-10-25', time: '22:00', city: 'Bursa', venue: 'BAOB Sahne', address: null, country: 'TR', ticketUrl: null, phone: null, poster: null, soldOut: false },
   { id: 5, date: '2025-06-20', time: '22:00', city: 'Êlih / Batman', venue: 'Batman İl Kültür Merkezi', address: null, country: 'TR', ticketUrl: null, phone: null, poster: null, soldOut: false },
   { id: 6, date: '2025-06-18', time: '22:00', city: 'Sêrt / Siirt', venue: 'Av. Tahir Elçi Konferans Salonu', address: null, country: 'TR', ticketUrl: null, phone: null, poster: null, soldOut: false },
+  { id: 9, date: '2025-03-18', time: null, city: 'Colemêrg / Hakkari', venue: 'Newroz 2025', address: null, country: 'TR', ticketUrl: null, phone: null, poster: null, soldOut: false },
+  { id: 10, date: '2025-03-17', time: null, city: 'Erdîş / Erciş (Wan)', venue: 'Newroz 2025', address: null, country: 'TR', ticketUrl: null, phone: null, poster: null, soldOut: false },
   { id: 7, date: '2024-09-26', time: '20:00', city: 'İzmir', venue: 'Nazım Hikmet Kültür Merkezi', address: null, country: 'TR', ticketUrl: null, phone: null, poster: null, soldOut: false },
 ]
 
@@ -52,10 +55,10 @@ export const seedNews: NewsItem[] = [
     date: '2026-10-29',
     title: { ku: 'Konserên Sermawezê: Rûsya, Fransa, Almanya', tr: 'Kasım konserleri: Rusya, Fransa, Almanya', en: 'November concerts: Russia, France, Germany', ru: 'Ноябрьские концерты: Россия, Франция, Германия' },
     body: {
-      ku: 'Azad Bedran di Sermawezê de li çar bajaran derdikeve ser sahneyê: 15ê Sermawezê li Sankt Petersburgê, 27ê li Parîsê, 28ê li Reimsê û 29ê li Kielê. Konsera Sankt Petersburgê li Restoran „1001 Noç“ (Lesnoy prospekt 48) ye, deriyên salonê saet 19:00an vedibin; ji bo cih rezervekirinê: +7 981 717-60-62 an +7 812 295-31-05. Cih û bilêtên Parîs, Reims û Kielê dê di demeke nêzîk de werin ragihandin.',
-      tr: 'Azad Bedran kasımda dört şehirde sahnede: 15 Kasım St. Petersburg, 27 Kasım Paris, 28 Kasım Reims ve 29 Kasım Kiel. St. Petersburg konseri Restoran „1001 Noç“ta (Lesnoy prospekt 48); kapılar 19:00’da açılıyor, rezervasyon: +7 981 717-60-62 veya +7 812 295-31-05. Paris, Reims ve Kiel için mekân ve bilet bilgileri yakında duyurulacak.',
-      en: 'Azad Bedran plays four cities in November: St. Petersburg on 15 November, Paris on the 27th, Reims on the 28th and Kiel on the 29th. The St. Petersburg show is at Restaurant “1001 Noch” (Lesnoy prospekt 48), doors at 7 pm, reservations on +7 981 717-60-62 or +7 812 295-31-05. Venues and tickets for Paris, Reims and Kiel will be announced soon.',
-      ru: 'В ноябре Азад Бедран выступит в четырёх городах: 15 ноября в Санкт-Петербурге, 27-го в Париже, 28-го в Реймсе и 29-го в Киле. Концерт в Санкт-Петербурге пройдёт в ресторане «1001 ночь» (Лесной проспект, 48), сбор гостей в 19:00, бронирование столов: +7 981 717-60-62 или +7 812 295-31-05. Площадки и билеты в Париже, Реймсе и Киле будут объявлены в ближайшее время.',
+      ku: 'Azad Bedran di Sermawezê de li çar bajaran derdikeve ser sahneyê: 15ê Sermawezê li Sankt Petersburgê, 27ê li Parîsê, 28ê li Reimsê û 29ê li Kielê. Konsera Sankt Petersburgê li Restoran „Skazka Vostoka – 1001 Noç“ (Lesnoy prospekt 48) ye, deriyên salonê saet 19:00an vedibin; ji bo cih rezervekirinê: +7 981 717-60-62 an +7 812 295-31-05. Cih û bilêtên Parîs, Reims û Kielê dê di demeke nêzîk de werin ragihandin.',
+      tr: 'Azad Bedran kasımda dört şehirde sahnede: 15 Kasım St. Petersburg, 27 Kasım Paris, 28 Kasım Reims ve 29 Kasım Kiel. St. Petersburg konseri Restoran „Skazka Vostoka – 1001 Noç“ta (Lesnoy prospekt 48); kapılar 19:00’da açılıyor, rezervasyon: +7 981 717-60-62 veya +7 812 295-31-05. Paris, Reims ve Kiel için mekân ve bilet bilgileri yakında duyurulacak.',
+      en: 'Azad Bedran plays four cities in November: St. Petersburg on 15 November, Paris on the 27th, Reims on the 28th and Kiel on the 29th. The St. Petersburg show is at Restaurant “Skazka Vostoka – 1001 Nights” (Lesnoy prospekt 48), doors at 7 pm, reservations on +7 981 717-60-62 or +7 812 295-31-05. Venues and tickets for Paris, Reims and Kiel will be announced soon.',
+      ru: 'В ноябре Азад Бедран выступит в четырёх городах: 15 ноября в Санкт-Петербурге, 27-го в Париже, 28-го в Реймсе и 29-го в Киле. Концерт в Санкт-Петербурге пройдёт в ресторане «Сказка Востока 1001 Ночь» (Лесной проспект, 48), сбор гостей в 19:00, бронирование столов: +7 981 717-60-62 или +7 812 295-31-05. Площадки и билеты в Париже, Реймсе и Киле будут объявлены в ближайшее время.',
     },
     image: tour,
     link: null,

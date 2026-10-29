@@ -54,7 +54,11 @@ export const bioSources = [
   { label: 'Bernamegeh – “Azad Bedran kimdir?”', url: 'https://www.bernamegeh.com/azad-bedran-kimdir' },
   { label: 'Hunersam – Azad Bedran', url: 'https://hunersam.com.tr/azadbedran' },
   { label: 'bianet – “We have gotten hungry for freedom” (01.10.2018)', url: 'https://bianet.org/english/art/201264-new-composition-by-selahattin-demirtas-we-get-hungry-for-freedom' },
-  { label: 'izmir.art – Azad Bedran konseri', url: 'https://izmir.art' },
+  { label: 'Medgündem – “Kürt sanatçısı Azad Bedran: Sanat hakikatin arayışıdır” (16.03.2018)', url: 'https://www.medgundem.com/kurt-sanatcisi-azad-bedransanat-hakikatin-arayisidir' },
+  { label: 'Kurdevents – Azad Bedran', url: 'https://kurdevents.com/ku/sanatci/bedran-azad/' },
+  { label: 'Yeni Yaşam – Newroz 2025 (13.03.2025)', url: 'https://yeniyasamgazetesi9.com/newrozda-sahne-alacak-sanatcilar-belli-oldu/' },
+  { label: 'Sartory Köln – Azad Bedran live (14.12.2025)', url: 'https://sartory.de/event/art-records-gmbh-5/' },
+  { label: 'Skazka Vostoka “1001 ночь” – Azad Bedran (15.11.2026)', url: 'https://skazkavostokaspb.ru/2026/10/10/azad-bedran-%d0%b2%d1%8b%d1%81%d1%82%d1%83%d0%bf%d0%b8%d1%82-%d0%b2-%d1%80%d0%b5%d1%81%d1%82%d0%be%d1%80%d0%b0%d0%bd%d0%b5-%d1%81%d0%ba%d0%b0%d0%b7%d0%ba%d0%b0-%d0%b2%d0%be%d1%81%d1%82%d0%be/' },
   { label: 'Apple Music – discography', url: 'https://music.apple.com/artist/azad-bedran/1116072473' },
   { label: 'Shazam – Azad Bedran', url: 'https://www.shazam.com/artist/azad-bedran/1116072473' },
 ]
@@ -159,12 +163,13 @@ const ku = {
         h: 'Destpêka muzîkê',
         p: [
           'Di deh saliya xwe de li Navenda Çandê ya Dicle Firatê ya li Amedê dest bi perwerdeya saz û deng kir. Di koroya zarokan Koma Kulîlkên Me de stran got; paşê bû solîst û sazbendê Koma Nûjiyanê, ku li gelek konser û festîvalan derket ser sahneyê.',
+          'Mamosteyên wî yên pêşîn Farqîn Azad û Bülent Turan bûn; di nav hunermendên ku bandor li wî kirine de Aram Tigran, Meryem Xan, Hozan Serhad, Eyşe Şan, Mizgîn û Ahmet Kaya hene. Strana xwe ya yekem, “Ax Çiyao”, bi Farqîn Azad, Bülent Turan û Xanemir re tomar kir; di 2012an de bi Hozan Diyar re duet kir. Ew hîn jî li Navenda Çandê ya Dicle Firatê dixebite.',
         ],
       },
       {
         h: 'Albûma yekem û “Aç Kaldık Özgürlüğe”',
         p: [
-          'Di 2016an de albûma wî ya yekem a solo, Rêwiyên Şad, bi 14 stranan ji labela Kom Müzikê derket. Di 2018an de strana “Aç Kaldık Özgürlüğe” – ku Selahattin Demirtaş li girtîgeha Edirneyê nivîsandibû – bi dengê xwe tomar kir; klîpa wê di 1ê Kewçêra 2018an de hate weşandin.',
+          'Di 2016an de albûma wî ya yekem a solo, Rêwiyên Şad, bi 14 stranan ji labela Kom Müzikê derket. Albûm stranên gelêrî yên anonîm û berhemên wî bi xwe digihîne hev û bi Hozan Comerd, Farqîn Azad û Xalê Seyitxan re duet tê de hene. Di 2018an de strana “Aç Kaldık Özgürlüğe” – ku Selahattin Demirtaş li girtîgeha Edirneyê nivîsandibû – bi dengê xwe tomar kir; klîpa wê di 1ê Kewçêra 2018an de hate weşandin.',
         ],
       },
       {
@@ -182,7 +187,7 @@ const ku = {
       {
         h: 'Li ser sahneyê',
         p: [
-          'Azad Bedran li Amed, Stenbol, Adana, Bursa, Êlih, Sêrt û Îzmîrê konser dane; li derveyî welat jî li Ewropa, Rûsya, Ermenistan û Qazaxistanê derketiye ser sahneyê. Di Tîrmeha 2026an de albûma zindî Evîna Azad (Live) bi 13 stranan derket. Di Sermawezê 2026an de li Sankt Petersburg, Parîs, Reims û Kielê konser dide.',
+          'Azad Bedran li Amed, Stenbol, Adana, Bursa, Êlih, Sêrt û Îzmîrê konser dane; li derveyî welat jî li Ewropa, Rûsya, Ermenistan û Qazaxistanê derketiye ser sahneyê. Di Newroza 2025an de li Erdîşa Wanê û li Colemêrgê stran gotin, û di 14ê Berfanbara 2025an de li Kolnê (Almanya) di salona Sartoryê de konser da. Di Tîrmeha 2026an de albûma zindî Evîna Azad (Live) bi 13 stranan derket. Di Sermawezê 2026an de li Sankt Petersburg, Parîs, Reims û Kielê konser dide.',
         ],
       },
     ],
@@ -193,9 +198,10 @@ const ku = {
       { year: '2018', text: '“Aç Kaldık Özgürlüğe”' },
       { year: '2019', text: '“Zindan” û “Ez Nisêbin Tu Qamişlo” digihîjin mîlyonan' },
       { year: '2023', text: 'Albûmên Evîna Azad û Paytexta Evînê' },
-      { year: '2025', text: 'Konser li Êlih, Sêrt, Bursa, Adana û Stenbolê' },
+      { year: '2025', text: 'Newroz li Erdîş û Colemêrgê; konser li Êlih, Sêrt, Bursa, Adana, Stenbol û Kolnê' },
       { year: '2026', text: 'Evîna Azad (Live) û konser li Rûsya, Fransa û Almanyayê' },
     ],
+    quote: 'Huner lêgerîna rastiyê ye.',
     sources: 'Çavkanî',
   },
   gallery: { kicker: 'Wêne', title: 'Galerî', more: 'Hemû wêne' },
@@ -315,12 +321,13 @@ const tr: Dict = {
         h: 'Müziğe ilk adımlar',
         p: [
           'On yaşında Diyarbakır’daki Dicle Fırat Kültür Merkezi’nde bağlama ve ses eğitimi almaya başladı. Koma Kulîlkên Me çocuk korosunda şarkı söyledi, ardından birçok konser ve festivalde sahne alan Koma Nûjiyan grubunun solisti ve bağlamacısı oldu.',
+          'İlk hocaları Farqîn Azad ve Bülent Turan’dı; etkilendiği isimler arasında Aram Tigran, Meryem Xan, Hozan Serhad, Eyşe Şan, Mizgîn ve Ahmet Kaya var. İlk şarkısı “Ax Çiyao”yu Farqîn Azad, Bülent Turan ve Xanemir ile kaydetti; 2012’de Hozan Diyar ile düet yaptı. Bugün hâlâ Dicle Fırat Kültür Merkezi’nde çalışıyor.',
         ],
       },
       {
         h: 'İlk albüm ve “Aç Kaldık Özgürlüğe”',
         p: [
-          '2016’da ilk solo albümü Rêwiyên Şad, 14 şarkıyla Kom Müzik etiketinden çıktı. 2018’de Selahattin Demirtaş’ın Edirne Cezaevi’nde yazdığı “Aç Kaldık Özgürlüğe” şarkısını seslendirdi; klibi 1 Ekim 2018’de yayımlandı.',
+          '2016’da ilk solo albümü Rêwiyên Şad, 14 şarkıyla Kom Müzik etiketinden çıktı. Albüm anonim halk şarkılarını kendi eserleriyle buluşturuyor; Hozan Comerd, Farqîn Azad ve Xalê Seyitxan ile düetler içeriyor. 2018’de Selahattin Demirtaş’ın Edirne Cezaevi’nde yazdığı “Aç Kaldık Özgürlüğe” şarkısını seslendirdi; klibi 1 Ekim 2018’de yayımlandı.',
         ],
       },
       {
@@ -338,7 +345,7 @@ const tr: Dict = {
       {
         h: 'Sahnede',
         p: [
-          'Diyarbakır, İstanbul, Adana, Bursa, Batman, Siirt ve İzmir’de konserler verdi; yurt dışında Avrupa, Rusya, Ermenistan ve Kazakistan’da sahneye çıktı. Temmuz 2026’da 13 şarkılık canlı albümü Evîna Azad (Live) yayımlandı. Kasım 2026’da St. Petersburg, Paris, Reims ve Kiel’de konserleri var.',
+          'Diyarbakır, İstanbul, Adana, Bursa, Batman, Siirt ve İzmir’de konserler verdi; yurt dışında Avrupa, Rusya, Ermenistan ve Kazakistan’da sahneye çıktı. Newroz 2025’te Van Erciş ve Hakkari’de sahne aldı; 14 Aralık 2025’te Köln’de (Almanya) Sartory salonunda konser verdi. Temmuz 2026’da 13 şarkılık canlı albümü Evîna Azad (Live) yayımlandı. Kasım 2026’da St. Petersburg, Paris, Reims ve Kiel’de konserleri var.',
         ],
       },
     ],
@@ -349,9 +356,10 @@ const tr: Dict = {
       { year: '2018', text: '“Aç Kaldık Özgürlüğe”' },
       { year: '2019', text: '“Zindan” ve “Ez Nisêbin Tu Qamişlo” milyonlara ulaştı' },
       { year: '2023', text: 'Evîna Azad ve Paytexta Evînê albümleri' },
-      { year: '2025', text: 'Batman, Siirt, Bursa, Adana ve İstanbul konserleri' },
+      { year: '2025', text: 'Erciş ve Hakkari’de Newroz; Batman, Siirt, Bursa, Adana, İstanbul ve Köln konserleri' },
       { year: '2026', text: 'Evîna Azad (Live) ve Rusya, Fransa, Almanya konserleri' },
     ],
+    quote: 'Sanat hakikatin arayışıdır.',
     sources: 'Kaynaklar',
   },
   gallery: { kicker: 'Fotoğraflar', title: 'Galeri', more: 'Tüm fotoğraflar' },
@@ -469,12 +477,13 @@ const en: Dict = {
         h: 'First steps',
         p: [
           'At the age of ten he began saz and vocal training at the Dicle Fırat Culture Centre in Diyarbakır. He sang in the children’s choir Koma Kulîlkên Me and later became lead singer and saz player of the group Koma Nûjiyan, which performed at many concerts and festivals.',
+          'His first teachers were Farqîn Azad and Bülent Turan; among his influences he names Aram Tigran, Meryem Xan, Hozan Serhad, Eyşe Şan, Mizgîn and Ahmet Kaya. He recorded his first song, “Ax Çiyao”, with Farqîn Azad, Bülent Turan and Xanemir, and in 2012 sang a duet with Hozan Diyar. He still works at the Dicle Fırat Culture Centre today.',
         ],
       },
       {
         h: 'Debut album and “Aç Kaldık Özgürlüğe”',
         p: [
-          'In 2016 his debut solo album Rêwiyên Şad was released with 14 songs on the Kom Müzik label. In 2018 he recorded “Aç Kaldık Özgürlüğe”, a song Selahattin Demirtaş had written in Edirne prison; the video was published on 1 October 2018.',
+          'In 2016 his debut solo album Rêwiyên Şad was released with 14 songs on the Kom Müzik label. It pairs anonymous folk songs with his own compositions and features duets with Hozan Comerd, Farqîn Azad and Xalê Seyitxan. In 2018 he recorded “Aç Kaldık Özgürlüğe”, a song Selahattin Demirtaş had written in Edirne prison; the video was published on 1 October 2018.',
         ],
       },
       {
@@ -492,7 +501,7 @@ const en: Dict = {
       {
         h: 'On stage',
         p: [
-          'Azad Bedran has played concerts in Diyarbakır, Istanbul, Adana, Bursa, Batman, Siirt and İzmir, and has performed abroad in Europe, Russia, Armenia and Kazakhstan. In July 2026 he released the 13-track live album Evîna Azad (Live). In November 2026 he plays St. Petersburg, Paris, Reims and Kiel.',
+          'Azad Bedran has played concerts in Diyarbakır, Istanbul, Adana, Bursa, Batman, Siirt and İzmir, and has performed abroad in Europe, Russia, Armenia and Kazakhstan. At Newroz 2025 he sang in Erciş (Van) and Hakkari, and on 14 December 2025 he played the Sartory hall in Cologne, Germany. In July 2026 he released the 13-track live album Evîna Azad (Live). In November 2026 he plays St. Petersburg, Paris, Reims and Kiel.',
         ],
       },
     ],
@@ -503,9 +512,10 @@ const en: Dict = {
       { year: '2018', text: '“Aç Kaldık Özgürlüğe”' },
       { year: '2019', text: '“Zindan” and “Ez Nisêbin Tu Qamişlo” reach millions' },
       { year: '2023', text: 'Albums Evîna Azad and Paytexta Evînê' },
-      { year: '2025', text: 'Concerts in Batman, Siirt, Bursa, Adana and Istanbul' },
+      { year: '2025', text: 'Newroz in Erciş and Hakkari; concerts in Batman, Siirt, Bursa, Adana, Istanbul and Cologne' },
       { year: '2026', text: 'Evîna Azad (Live) and shows in Russia, France and Germany' },
     ],
+    quote: 'Art is the search for truth.',
     sources: 'Sources',
   },
   gallery: { kicker: 'Photos', title: 'Gallery', more: 'All photos' },
@@ -623,12 +633,13 @@ const ru: Dict = {
         h: 'Первые шаги',
         p: [
           'В десять лет он начал заниматься сазом и вокалом в культурном центре «Дидже Фырат» в Диярбакыре. Пел в детском хоре Koma Kulîlkên Me, затем стал солистом и сазистом группы Koma Nûjiyan, выступавшей на многих концертах и фестивалях.',
+          'Его первыми учителями были Фаркин Азад и Бюлент Туран; среди повлиявших на него артистов он называет Арама Тиграна, Мерьем Хан, Хозана Серхада, Эйше Шан, Мизгин и Ахмета Кайю. Первую песню, «Ax Çiyao», он записал с Фаркином Азадом, Бюлентом Тураном и Ханемиром, а в 2012 году спел дуэтом с Хозаном Дияром. Он по-прежнему работает в культурном центре «Дидже Фырат».',
         ],
       },
       {
         h: 'Дебютный альбом и «Aç Kaldık Özgürlüğe»',
         p: [
-          'В 2016 году на лейбле Kom Müzik вышел его первый сольный альбом Rêwiyên Şad из 14 песен. В 2018 году он записал песню «Aç Kaldık Özgürlüğe», которую Селахаттин Демирташ написал в тюрьме Эдирне; клип был опубликован 1 октября 2018 года.',
+          'В 2016 году на лейбле Kom Müzik вышел его первый сольный альбом Rêwiyên Şad из 14 песен. Альбом объединяет народные песни и его собственные композиции; в нём есть дуэты с Хозаном Комердом, Фаркином Азадом и Хале Сейитханом. В 2018 году он записал песню «Aç Kaldık Özgürlüğe», которую Селахаттин Демирташ написал в тюрьме Эдирне; клип был опубликован 1 октября 2018 года.',
         ],
       },
       {
@@ -646,7 +657,7 @@ const ru: Dict = {
       {
         h: 'На сцене',
         p: [
-          'Азад Бедран выступал в Диярбакыре, Стамбуле, Адане, Бурсе, Батмане, Сиирте и Измире, а за рубежом – в Европе, России, Армении и Казахстане. В июле 2026 года вышел концертный альбом Evîna Azad (Live) из 13 песен. В ноябре 2026 года он выступает в Санкт-Петербурге, Париже, Реймсе и Киле.',
+          'Азад Бедран выступал в Диярбакыре, Стамбуле, Адане, Бурсе, Батмане, Сиирте и Измире, а за рубежом – в Европе, России, Армении и Казахстане. На Новруз 2025 года он пел в Эрджише (Ван) и Хаккари, а 14 декабря 2025 года дал концерт в зале Sartory в Кёльне (Германия). В июле 2026 года вышел концертный альбом Evîna Azad (Live) из 13 песен. В ноябре 2026 года он выступает в Санкт-Петербурге, Париже, Реймсе и Киле.',
         ],
       },
     ],
@@ -657,9 +668,10 @@ const ru: Dict = {
       { year: '2018', text: '«Aç Kaldık Özgürlüğe»' },
       { year: '2019', text: '«Zindan» и «Ez Nisêbin Tu Qamişlo» – миллионы просмотров' },
       { year: '2023', text: 'Альбомы Evîna Azad и Paytexta Evînê' },
-      { year: '2025', text: 'Концерты в Батмане, Сиирте, Бурсе, Адане и Стамбуле' },
+      { year: '2025', text: 'Новруз в Эрджише и Хаккари; концерты в Батмане, Сиирте, Бурсе, Адане, Стамбуле и Кёльне' },
       { year: '2026', text: 'Evîna Azad (Live) и концерты в России, Франции и Германии' },
     ],
+    quote: 'Искусство – это поиск истины.',
     sources: 'Источники',
   },
   gallery: { kicker: 'Фото', title: 'Галерея', more: 'Все фото' },
