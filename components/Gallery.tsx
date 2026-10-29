@@ -1,47 +1,44 @@
 'use client'
 import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
-import { Close } from './Icons'
+import { Close, Next, Prev } from './Icons'
 
-type Item = { src: string | null; alt: string }
+type Item = { src: string; w: number; h: number }
 
-export default function Gallery({ items, placeholder, closeLabel }: { items: Item[]; placeholder: string; closeLabel: string }) {
+export default function Gallery({ items, alt, closeLabel }: { items: Item[]; alt: string; closeLabel: string }) {
   const [index, setIndex] = useState<number | null>(null)
-  const real = items.filter((i): i is { src: string; alt: string } => !!i.src)
-
   const close = useCallback(() => setIndex(null), [])
+  const go = useCallback((d: number) => setIndex((i) => (i === null ? i : (i + d + items.length) % items.length)), [items.length])
+
   useEffect(() => {
     if (index === null) return
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') close()
-      if (e.key === 'ArrowRight') setIndex((i) => (i === null ? i : (i + 1) % real.length))
-      if (e.key === 'ArrowLeft') setIndex((i) => (i === null ? i : (i - 1 + real.length) % real.length))
+      if (e.key === 'ArrowRight') go(1)
+      if (e.key === 'ArrowLeft') go(-1)
     }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [index, real.length, close])
+    document.documentElement.classList.add('menu-open')
+    return () => { window.removeEventListener('keydown', onKey); document.documentElement.classList.remove('menu-open') }
+  }, [index, close, go])
 
   return (
     <>
-      <div className="gallery-grid">
-        {items.map((item, i) =>
-          item.src ? (
-            <button key={i} className={`gallery-item g${i % 6}`} onClick={() => setIndex(real.indexOf(item as { src: string; alt: string }))}>
-              <Image src={item.src} alt={item.alt} fill sizes="(max-width: 720px) 50vw, 33vw" />
-            </button>
-          ) : (
-            <div key={i} className={`gallery-item g${i % 6} is-placeholder`}>
-              <span>{placeholder} {String(i + 1).padStart(2, '0')}</span>
-            </div>
-          ),
-        )}
+      <div className="gallery">
+        {items.map((item, i) => (
+          <button key={item.src} type="button" className="gallery-item" style={{ aspectRatio: `${item.w} / ${item.h}` }} onClick={() => setIndex(i)} aria-label={`${alt} ${i + 1}`}>
+            <Image src={item.src} alt={`${alt} ${i + 1}`} fill sizes="(max-width: 720px) 50vw, 33vw" />
+          </button>
+        ))}
       </div>
-      {index !== null && real[index] && (
+      {index !== null && (
         <div className="lightbox" role="dialog" aria-modal="true" onClick={close}>
           <button className="lightbox-close" onClick={close} aria-label={closeLabel}><Close size={26} /></button>
+          <button className="lightbox-nav prev" onClick={(e) => { e.stopPropagation(); go(-1) }} aria-label="←"><Prev size={22} /></button>
           <div className="lightbox-img" onClick={(e) => e.stopPropagation()}>
-            <Image src={real[index].src} alt={real[index].alt} fill sizes="100vw" style={{ objectFit: 'contain' }} />
+            <Image src={items[index].src} alt={`${alt} ${index + 1}`} fill sizes="100vw" style={{ objectFit: 'contain' }} />
           </div>
+          <button className="lightbox-nav next" onClick={(e) => { e.stopPropagation(); go(1) }} aria-label="→"><Next size={22} /></button>
         </div>
       )}
     </>

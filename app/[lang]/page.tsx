@@ -1,104 +1,134 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowRight, Sun } from '@/components/Icons'
+import Logo from '@/components/Logo'
+import { PlayButton } from '@/components/Player'
+import { ArrowRight } from '@/components/Icons'
 import {
-  ArtistJsonLd, BioBlock, LatestRelease, ManagerCard, MoreLink, NewsGrid, NextShowCard, SectionHead, SocialList, StreamBuyBand, UpcomingList, VideoGrid,
+  ArtistJsonLd, ConcertList, Facts, LatestRelease, ManagerCard, MoreLink, NewsGrid, NextShow, PlatformStrip, ReleaseGrid, Rule, SectionHead, VideoGrid, daysUntil,
 } from '@/components/sections'
-import { getDict, isLocale } from '@/lib/i18n'
+import { dateParts, getDict, isLocale } from '@/lib/i18n'
 import { href } from '@/lib/routes'
-import { site } from '@/lib/site'
-import { getArtistImage, getConcerts, getNews, getReleases } from '@/lib/content'
+import { images, site } from '@/lib/site'
+import { getConcerts, getNews } from '@/lib/content'
+import { getDiscography } from '@/lib/music'
+import { getVideos } from '@/lib/videos'
+import { latestQueue, toView } from '@/lib/views'
 
-export const revalidate = 300
+export const revalidate = 21600
 
 export default async function Home({ params }: PageProps<'/[lang]'>) {
   const { lang } = await params
   if (!isLocale(lang)) notFound()
   const t = getDict(lang)
 
-  const [{ upcoming }, news, releases, artistImage] = await Promise.all([getConcerts(), getNews(3), getReleases(), getArtistImage()])
+  const [{ upcoming }, news, releases, { videos }] = await Promise.all([getConcerts(), getNews(3), getDiscography(), getVideos()])
   const latest = releases[0]
-  const heroImage = site.heroImage ?? artistImage
+  const albums = releases.filter((r) => r.type !== 'single')
+  const singles = releases.filter((r) => r.type === 'single' && r.id !== latest?.id).slice(0, 8)
+  const next = upcoming[0]
+  const queue = latestQueue(releases)
 
   return (
     <main>
-      <ArtistJsonLd upcoming={upcoming} image={heroImage} />
+      <ArtistJsonLd upcoming={upcoming} />
 
       <section className="hero">
-        <div className={`hero-media${heroImage ? ' has-photo' : ''}`}>
-          {heroImage ? (
-            <div className="hero-photo"><Image src={heroImage} alt="Azad Bedran" fill priority sizes="(max-width: 900px) 100vw, 70vw" className="hero-img" /></div>
-          ) : <div className="hero-sun"><Sun /></div>}
+        <div className="hero-img" aria-hidden>
+          <Image src={images.hero.src} alt="" fill priority quality={82} sizes="100vw" />
         </div>
-        <div className="container hero-content">
-          <p className="eyebrow reveal">{t.hero.eyebrow}</p>
-          <h1 className="hero-title reveal"><span>Azad</span><span className="indent">Bedran</span></h1>
-          <p className="hero-tagline reveal">{t.hero.tagline}</p>
-          <div className="hero-actions reveal">
-            <a className="btn btn-gold" href={href(lang, 'music')}>{t.hero.listen} <ArrowRight size={16} /></a>
-            <a className="btn btn-line" href={href(lang, 'videos')}>{t.hero.watch}</a>
+        <div className="container hero-inner">
+          <p className="eyebrow hero-kicker">{t.hero.kicker}</p>
+          <h1 className="hero-logo"><Logo variant="stacked" title="Azad Bedran" /></h1>
+          <Rule />
+          <p className="hero-tagline">{t.hero.tagline}</p>
+          <div className="btn-row">
+            <PlayButton items={queue} label={`${t.hero.listen}${latest ? ` · ${latest.title}` : ''}`} />
+            <Link className="btn btn-ghost" href={href(lang, 'concerts')}>{t.hero.concerts} <ArrowRight size={16} /></Link>
           </div>
         </div>
-        <NextShowCard next={upcoming[0]} t={t} lang={lang} />
+        {next && (
+          <Link href={href(lang, 'concerts')} className="hero-next">
+            <span className="eyebrow">{t.hero.nextShow}</span>
+            <span className="hero-next-main">{dateParts(next.date, lang).day} {dateParts(next.date, lang).month} · {next.city}</span>
+            <span className="pill">{t.concerts.daysLeft(daysUntil(next.date))}</span>
+          </Link>
+        )}
       </section>
 
-      {latest && (
-        <div className="ticker" aria-hidden>
-          <div className="ticker-track">
-            {Array.from({ length: 8 }, (_, i) => <span key={i}>“{latest.title}” <i>—</i> {t.ticker} <i>✦</i></span>)}
-          </div>
-        </div>
-      )}
+      <PlatformStrip t={t} />
 
       {latest && (
         <section className="section">
           <div className="container">
-            <SectionHead n="01" kicker={t.music.kicker} title={t.music.latest} />
-            <LatestRelease latest={latest} t={t} lang={lang} withPlayer={false} />
-            <MoreLink to={href(lang, 'music')} label={t.more.music} />
+            <LatestRelease r={toView(latest, t)} t={t} />
           </div>
         </section>
       )}
 
-      <section className="section section-alt">
-        <div className="container">
-          <SectionHead n="02" kicker={t.news.kicker} title={t.news.title} />
-          <NewsGrid news={news} t={t} lang={lang} latestCover={latest?.cover} />
-          <MoreLink to={href(lang, 'news')} label={t.more.news} />
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <SectionHead n="03" kicker={t.concerts.kicker} title={t.concerts.upcoming} />
-          <UpcomingList upcoming={upcoming.slice(0, 4)} t={t} lang={lang} />
-          <MoreLink to={href(lang, 'concerts')} label={t.more.concerts} />
-        </div>
-      </section>
-
-      <StreamBuyBand t={t} />
-
-      <section className="section">
-        <div className="container">
-          <SectionHead n="04" kicker={t.videos.kicker} title={t.videos.title} />
-          <VideoGrid t={t} limit={1} />
-          <MoreLink to={href(lang, 'videos')} label={t.more.videos} />
-        </div>
-      </section>
-
-      <section className="section section-alt">
-        <div className="container">
-          <BioBlock t={t} portrait={site.portraitImage ?? artistImage} full={false} moreHref={href(lang, 'bio')} />
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container contact">
-          <div>
-            <SectionHead n="05" kicker={t.contact.kicker} title={t.contact.title} />
-            <p className="muted lead-sm">{t.contact.text}</p>
-            <SocialList t={t} />
+      {upcoming.length > 0 && (
+        <section className="section section-tour">
+          <div className="container">
+            <SectionHead kicker={t.concerts.kicker} title={t.concerts.upcoming} />
+            <NextShow c={next} t={t} lang={lang} />
+            {upcoming.length > 1 && <ConcertList concerts={upcoming.slice(1)} t={t} lang={lang} />}
+            <MoreLink to={href(lang, 'concerts')} label={t.concerts.more} />
           </div>
+        </section>
+      )}
+
+      <section className="section">
+        <div className="container">
+          <SectionHead kicker={t.music.kicker} title={t.music.albums} />
+          <ReleaseGrid items={albums.map((r) => toView(r, t))} t={t} />
+          <h3 className="sub-head">{t.music.singles}</h3>
+          <ReleaseGrid items={singles.map((r) => toView(r, t))} t={t} compact />
+          <MoreLink to={href(lang, 'music')} label={`${t.music.more} · ${t.music.count(releases.length)}`} />
+        </div>
+      </section>
+
+      <section className="section section-dark">
+        <div className="container">
+          <SectionHead kicker={t.videos.kicker} title={t.videos.title} />
+          <VideoGrid videos={videos.slice(0, 4)} t={t} lang={lang} />
+          <div className="btn-row">
+            <MoreLink to={href(lang, 'videos')} label={t.nav.videos} />
+            <MoreLink to={site.youtubeSubscribeUrl} label={t.videos.subscribe} external />
+          </div>
+        </div>
+      </section>
+
+      <section className="section bio-teaser">
+        <div className="container bio-teaser-grid">
+          <div className="bio-teaser-img">
+            <Image src={images.portrait.src} alt="Azad Bedran" fill sizes="(max-width: 900px) 90vw, 480px" />
+          </div>
+          <div>
+            <SectionHead kicker={t.bio.kicker} title={t.bio.title}>
+              <p className="lead">{t.bio.lead}</p>
+            </SectionHead>
+            <p>{t.bio.sections[0].p[0]}</p>
+            <Facts t={t} />
+            <MoreLink to={href(lang, 'bio')} label={t.bio.more} />
+          </div>
+        </div>
+      </section>
+
+      {news.length > 0 && (
+        <section className="section">
+          <div className="container">
+            <SectionHead kicker={t.news.kicker} title={t.news.title} />
+            <NewsGrid news={news} t={t} lang={lang} />
+            <MoreLink to={href(lang, 'news')} label={t.news.more} />
+          </div>
+        </section>
+      )}
+
+      <section className="section section-contact">
+        <div className="container contact-grid">
+          <SectionHead kicker={t.contact.kicker} title={t.contact.title}>
+            <p className="lead">{t.contact.text}</p>
+          </SectionHead>
           <ManagerCard t={t} />
         </div>
       </section>

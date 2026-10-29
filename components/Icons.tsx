@@ -23,3 +23,7 @@ export const Sun = ({ size = 520 }: P) => (
     })}
   </svg>
 )
+export const Pause = ({ size }: P) => (<svg {...base(size)} fill="currentColor" stroke="none"><rect x="6.5" y="5" width="3.6" height="14" rx=".8" /><rect x="13.9" y="5" width="3.6" height="14" rx=".8" /></svg>)
+export const Next = ({ size }: P) => (<svg {...base(size)} fill="currentColor" stroke="none"><path d="M6 6.2v11.6a.7.7 0 0 0 1.1.6l8.3-5.8a.7.7 0 0 0 0-1.2L7.1 5.6a.7.7 0 0 0-1.1.6Z" /><rect x="16.4" y="5.5" width="2.4" height="13" rx=".6" /></svg>)
+export const Prev = ({ size }: P) => (<svg {...base(size)} fill="currentColor" stroke="none"><path d="M18 6.2v11.6a.7.7 0 0 1-1.1.6l-8.3-5.8a.7.7 0 0 1 0-1.2l8.3-5.8a.7.7 0 0 1 1.1.6Z" /><rect x="5.2" y="5.5" width="2.4" height="13" rx=".6" /></svg>)
+export const Headphones = ({ size }: P) => (<svg {...base(size)}><path d="M4 15v-3a8 8 0 0 1 16 0v3" /><rect x="3" y="14" width="4.5" height="6.5" rx="1.5" /><rect x="16.5" y="14" width="4.5" height="6.5" rx="1.5" /></svg>)

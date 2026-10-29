@@ -1,16 +1,13 @@
-// Zentrale Einstellungen der Website. Alles, was mit TODO markiert ist, bitte vor dem Livegang ersetzen.
+// Zentrale Angaben der Website. Quellen der Profil-Links: offizielle Konten, geprüft am 29.10.2026.
 
 export const site = {
   name: 'Azad Bedran',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://azadbedran.com',
 
-  // Lokale Fotos in /public/images ablegen. null = elegante Platzhalter / Bild von Deezer.
-  heroImage: '/images/hero.jpg' as string | null, // Querformat, ideal mind. 2400 px breit
-  portraitImage: '/images/portrait.jpg' as string | null, // Hochformat 4:5
-
   deezerArtistId: '10396480',
   appleArtistId: '1116072473',
-  spotifyArtistId: '', // TODO: Spotify-Artist-ID eintragen (aus open.spotify.com/artist/<ID>)
+  spotifyArtistId: '6nf6LaxU7kzFoQmiWB9LFN',
+  youtubeChannelId: 'UCGd0Bur3OfTZibdHr_o26Zg',
 
   socials: [
     { id: 'instagram', label: 'Instagram', handle: '@azadbedran', url: 'https://www.instagram.com/azadbedran/' },
@@ -26,46 +23,36 @@ export type Platform = { id: string; label: string; url: string }
 
 export function streamingPlatforms(): Platform[] {
   return [
-    {
-      id: 'spotify',
-      label: 'Spotify',
-      url: site.spotifyArtistId
-        ? `https://open.spotify.com/artist/${site.spotifyArtistId}`
-        : 'https://open.spotify.com/search/Azad%20Bedran/artists',
-    },
+    { id: 'spotify', label: 'Spotify', url: `https://open.spotify.com/artist/${site.spotifyArtistId}` },
     { id: 'apple', label: 'Apple Music', url: `https://music.apple.com/artist/azad-bedran/${site.appleArtistId}` },
-    { id: 'youtube-music', label: 'YouTube Music', url: 'https://music.youtube.com/channel/UCGd0Bur3OfTZibdHr_o26Zg' },
+    { id: 'youtube-music', label: 'YouTube Music', url: `https://music.youtube.com/channel/${site.youtubeChannelId}` },
     { id: 'deezer', label: 'Deezer', url: `https://www.deezer.com/artist/${site.deezerArtistId}` },
-    { id: 'tidal', label: 'TIDAL', url: 'https://tidal.com/browse/artist/7842088' },
-    { id: 'amazon', label: 'Amazon Music', url: 'https://music.amazon.com/search/Azad%20Bedran' },
-  ]
-}
-
-export function buyPlatforms(): Platform[] {
-  return [
-    { id: 'itunes', label: 'iTunes Store', url: `https://music.apple.com/artist/azad-bedran/${site.appleArtistId}` },
-    { id: 'amazon', label: 'Amazon', url: 'https://www.amazon.com/s?k=Azad+Bedran&i=digital-music' },
-    { id: 'qobuz', label: 'Qobuz', url: 'https://www.qobuz.com/us-en/search?q=Azad%20Bedran' },
+    { id: 'amazon', label: 'Amazon Music', url: 'https://music.amazon.com/artists/B01FXZXKOO/azad-bedran' },
+    { id: 'shazam', label: 'Shazam', url: `https://www.shazam.com/artist/azad-bedran/${site.appleArtistId}` },
   ]
 }
 
 export const manager = {
   name: 'Ozan Kızılkar',
-  photo: null as string | null, // z. B. '/images/ozan-kizilkar.jpg' (quadratisch)
+  photo: '/images/ozan-kizilkar.jpg',
   phone: '+90 539 545 24 76',
-  email: 'management@azadbedran.com', // TODO: echte Adresse
 }
 
-export const videos = [
-  { id: 'egq65dfRCE8', title: 'Wayê Wayê' },
-  { id: 'QjVfjl1WZSQ', title: 'Aşk Amedspor' },
-  { id: 'W5h52CcRZhY', title: 'Partizan (Akustîk)' },
-]
+export const whatsappUrl = `https://wa.me/${manager.phone.replace(/\D/g, '')}`
+export const telUrl = `tel:${manager.phone.replace(/\s/g, '')}`
 
-// Galerie: Dateien in /public/gallery legen und hier eintragen. Leere Einträge werden als Platzhalter gezeigt.
-export const gallery: { src: string | null; alt: string }[] = [
-  { src: '/gallery/azad-warm.jpg', alt: 'Azad Bedran' },
-  { src: '/gallery/azad-portrait-close.jpg', alt: 'Azad Bedran – Porträt' },
-  { src: '/gallery/azad-studio-wide.jpg', alt: 'Azad Bedran im Studio' },
-  { src: '/gallery/azad-leather.jpg', alt: 'Azad Bedran' },
+export const images = {
+  hero: { src: '/images/azad-studio.jpg', width: 2400, height: 1350 },
+  portrait: { src: '/images/azad-portrait-close.jpg', width: 1290, height: 1500 },
+}
+
+// Galerie: nur eigene, freigegebene Fotos (Freigabe durch Ferhat, 28.10.2026)
+export const gallery = [
+  { src: '/images/azad-studio.jpg', w: 2400, h: 1350 },
+  { src: '/images/azad-live-stage.jpg', w: 463, h: 662 },
+  { src: '/images/azad-portrait-close.jpg', w: 1290, h: 1500 },
+  { src: '/images/azad-keffiyeh.jpg', w: 462, h: 663 },
+  { src: '/images/azad-warm.jpg', w: 1500, h: 945 },
+  { src: '/images/azad-leather.jpg', w: 447, h: 447 },
+  { src: '/images/azad-blazer.jpg', w: 399, h: 501 },
 ]

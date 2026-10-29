@@ -1,48 +1,48 @@
 :root {
-  --bg: #120d09; --bg-2: #1a130d; --cream: #efe3cf; --gold: #c9a46a; --muted: #a8977f; --line: rgba(239, 227, 207, .16);
-  --display: 'Bodoni Moda Variable', 'Didot', 'Bodoni 72', Georgia, serif; --sans: 'Manrope Variable', system-ui, sans-serif;
+  --bg: #0f0a07; --bg-2: #1b120c; --bronze: #6b412c; --cream: #f3e6d3; --gold: #e0a35e; --glow: #f5cd8f; --muted: #ad9a86; --line: rgba(243, 230, 211, .16);
+  --display: 'Bodoni Moda Variable', 'Playfair Display', 'Didot', 'Bodoni 72', Georgia, serif; --sans: 'Manrope Variable', system-ui, sans-serif;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; color: var(--cream); font-family: var(--sans); -webkit-font-smoothing: antialiased; background: var(--bg); }
 a { color: inherit; text-decoration: none; }
-.caps { font-family: var(--display); font-variation-settings: 'opsz' 18; text-transform: uppercase; letter-spacing: .24em; font-weight: 500; }
+.caps { font-family: var(--sans); text-transform: uppercase; letter-spacing: .18em; font-weight: 600; }
 
 .soon { position: relative; min-height: 100svh; display: grid; grid-template-rows: auto 1fr auto; padding: 28px clamp(20px, 5vw, 72px) 44px; overflow: hidden; isolation: isolate;
-  background: radial-gradient(90% 70% at 20% 30%, #2a1d12 0%, var(--bg) 60%); }
-.soon-photo { position: absolute; inset: 0 0 0 36%; z-index: -1; -webkit-mask-image: linear-gradient(90deg, transparent, #000 38%); mask-image: linear-gradient(90deg, transparent, #000 38%); }
-.soon-photo img { object-fit: cover; object-position: 55% 28%; animation: settle 14s cubic-bezier(.2,.7,.1,1) both; filter: saturate(.92) contrast(1.04); }
-.soon-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, var(--bg) 0%, transparent 40%), linear-gradient(90deg, rgba(18,13,9,.55), transparent 55%); }
+  background: radial-gradient(90% 70% at 20% 30%, #2b1a10 0%, var(--bg) 62%); }
+.soon-photo { position: absolute; inset: 0 0 0 30%; z-index: -1; -webkit-mask-image: linear-gradient(90deg, transparent, #000 38%); mask-image: linear-gradient(90deg, transparent, #000 38%); }
+.soon-photo img { object-fit: cover; object-position: 58% 30%; animation: settle 14s cubic-bezier(.2,.7,.1,1) both; filter: saturate(.92) contrast(1.04); }
+.soon-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, var(--bg) 0%, transparent 40%), linear-gradient(90deg, rgba(15,10,7,.6), transparent 55%); }
 @keyframes settle { from { transform: scale(1.06); } }
 
 .soon-top { display: flex; justify-content: flex-end; }
-.soon-lang { display: flex; gap: 2px; border: 1px solid var(--line); border-radius: 999px; padding: 4px; background: rgba(18, 13, 9, .5); backdrop-filter: blur(12px); }
-.soon-lang a { font-size: .8rem; font-weight: 600; padding: 9px 16px; border-radius: 999px; color: var(--muted); transition: color .3s, background .3s; }
+.soon-lang { display: flex; gap: 2px; border: 1px solid var(--line); border-radius: 999px; padding: 4px; background: rgba(15, 10, 7, .5); backdrop-filter: blur(12px); }
+.soon-lang a { font-size: .88rem; font-weight: 600; padding: 9px 16px; border-radius: 999px; color: var(--muted); transition: color .3s, background .3s; }
 .soon-lang a[aria-current='true'] { background: var(--cream); color: var(--bg); }
 .soon-lang a:hover:not([aria-current='true']) { color: var(--cream); }
 
 .soon-body { align-self: center; width: min(540px, 100%); padding: 48px 0; animation: rise 1.3s cubic-bezier(.2,.7,.1,1) both; }
 @keyframes rise { from { opacity: 0; transform: translateY(20px); } }
-.soon-kicker { color: var(--gold); font-size: .78rem; margin: 0 0 26px; text-align: center; }
+.soon-kicker { color: var(--gold); font-size: .8rem; margin: 0 0 26px; text-align: center; }
 .soon h1 { margin: 0; color: var(--cream); }
 .soon-logo { display: block; width: 100%; height: auto; }
 .soon-rule { display: flex; align-items: center; gap: 14px; margin: 26px 0 22px; }
 .soon-rule::before, .soon-rule::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
 .soon-rule::after { background: linear-gradient(90deg, var(--gold), transparent); }
 .soon-rule span { width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); }
-.soon-title { text-align: center; color: var(--gold); font-size: clamp(1rem, 2vw, 1.25rem); margin: 0 0 22px; }
-.soon-text { text-align: center; color: #d9ccb7; font-size: 1.02rem; line-height: 1.7; margin: 0 auto 30px; max-width: 440px; }
+.soon-title { text-align: center; color: var(--glow); font-family: var(--display); font-variation-settings: 'opsz' 96; font-weight: 500; text-transform: none; letter-spacing: .01em; font-size: clamp(1.9rem, 3.6vw, 2.6rem); line-height: 1.15; margin: 0 0 18px; }
+.soon-text { text-align: center; color: #e6d7c2; font-size: 1.08rem; line-height: 1.75; margin: 0 auto 30px; max-width: 440px; }
 .soon-social { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 26px; }
-.soon-social a { font-size: .72rem; color: var(--cream); border-bottom: 1px solid transparent; padding-bottom: 3px; transition: border-color .3s, color .3s; }
+.soon-social a { font-size: .8rem; color: var(--cream); border-bottom: 1px solid transparent; padding-bottom: 3px; transition: border-color .3s, color .3s; }
 .soon-social a:hover { color: var(--gold); border-color: var(--gold); }
 
 .soon-login { width: min(400px, 100%); }
-.soon-login label { display: block; font-size: .66rem; color: var(--muted); margin-bottom: 10px; }
-.soon-field { display: flex; border: 1px solid var(--line); border-radius: 999px; padding: 4px; background: rgba(18, 13, 9, .6); backdrop-filter: blur(12px); transition: border-color .3s; }
+.soon-login label { display: block; font-size: .78rem; color: #cdbba4; margin-bottom: 10px; }
+.soon-field { display: flex; border: 1px solid var(--line); border-radius: 999px; padding: 4px; background: rgba(15, 10, 7, .6); backdrop-filter: blur(12px); transition: border-color .3s; }
 .soon-field:focus-within { border-color: var(--gold); }
 .soon-field input { flex: 1; min-width: 0; background: none; border: 0; color: var(--cream); font: inherit; font-size: 1rem; padding: 11px 18px; outline: none; letter-spacing: .3em; }
 .soon-field input::placeholder { letter-spacing: normal; color: var(--muted); }
-.soon-field button { border: 0; border-radius: 999px; background: var(--gold); color: var(--bg); font-size: .72rem; padding: 0 24px; cursor: pointer; transition: background .3s; }
-.soon-field button:hover { background: var(--cream); }
+.soon-field button { border: 0; border-radius: 999px; background: var(--gold); color: var(--bg); font-size: .82rem; padding: 0 24px; cursor: pointer; transition: background .3s; }
+.soon-field button:hover { background: var(--glow); }
 .soon-error { color: #e9a08c; font-size: .85rem; margin: 10px 0 0 18px; }
 
 .kilim { position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: url('/brand/kilim.svg') repeat-x center / auto 10px; opacity: .9; }

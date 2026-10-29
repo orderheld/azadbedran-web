@@ -1,9 +1,11 @@
 import { notFound } from 'next/navigation'
-import { ArrowUpRight } from '@/components/Icons'
-import { PageIntro, VideoGrid } from '@/components/sections'
+import { MoreLink, PageHero, VideoGrid } from '@/components/sections'
 import { getDict, isLocale } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
 import { site } from '@/lib/site'
+import { getVideos } from '@/lib/videos'
+
+export const revalidate = 10800
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/videos'>) {
   const { lang } = await params
@@ -16,15 +18,16 @@ export default async function VideosPage({ params }: PageProps<'/[lang]/videos'>
   const { lang } = await params
   if (!isLocale(lang)) notFound()
   const t = getDict(lang)
+  const { videos } = await getVideos()
   return (
     <main>
-      <PageIntro kicker={t.videos.kicker} title={t.videos.title} />
+      <PageHero kicker={t.videos.kicker} title={t.videos.title} lead={t.videos.fromChannel} />
       <section className="section section-tight">
         <div className="container">
-          <VideoGrid t={t} />
-          <div className="video-cta">
-            <a className="btn btn-red" href={site.youtubeSubscribeUrl} target="_blank" rel="noopener">{t.stream.subscribe}</a>
-            <a className="link-arrow" href={site.socials[1].url} target="_blank" rel="noopener">{t.videos.more} <ArrowUpRight size={14} /></a>
+          <VideoGrid videos={videos} t={t} lang={lang} />
+          <div className="btn-row">
+            <MoreLink to={site.socials.find((s) => s.id === 'youtube')!.url} label={t.videos.more} external />
+            <MoreLink to={site.youtubeSubscribeUrl} label={t.videos.subscribe} external />
           </div>
         </div>
       </section>

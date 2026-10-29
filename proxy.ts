@@ -5,7 +5,7 @@ const locales = ['ku', 'tr', 'en'] as const
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const match = pathname.match(/^\/(ku|tr|en)(\/|$)/)
+  const match = pathname.match(/^\/(ku|tr|en|ru)(\/|$)/)
 
   if (gateEnabled() && request.cookies.get(GATE_COOKIE)?.value !== (await accessToken())) {
     const url = request.nextUrl.clone()

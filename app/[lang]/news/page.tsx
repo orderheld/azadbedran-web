@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation'
-import { NewsGrid, PageIntro } from '@/components/sections'
+import { NewsGrid, PageHero } from '@/components/sections'
 import { getDict, isLocale } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
-import { getNews, getReleases } from '@/lib/content'
+import { getNews } from '@/lib/content'
 
-export const revalidate = 300
+export const revalidate = 600
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/news'>) {
   const { lang } = await params
@@ -17,15 +17,12 @@ export default async function NewsPage({ params }: PageProps<'/[lang]/news'>) {
   const { lang } = await params
   if (!isLocale(lang)) notFound()
   const t = getDict(lang)
-  const [news, releases] = await Promise.all([getNews(50), getReleases()])
-
+  const news = await getNews(50)
   return (
     <main>
-      <PageIntro kicker={t.news.kicker} title={t.news.title} />
+      <PageHero kicker={t.news.kicker} title={t.news.title} />
       <section className="section section-tight">
-        <div className="container">
-          <NewsGrid news={news} t={t} lang={lang} latestCover={releases[0]?.cover} />
-        </div>
+        <div className="container"><NewsGrid news={news} t={t} lang={lang} /></div>
       </section>
     </main>
   )

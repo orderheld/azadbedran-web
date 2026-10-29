@@ -3,7 +3,7 @@ import { GATE_COOKIE, accessToken, checkPassword } from '@/lib/gate'
 
 export async function POST(request: NextRequest) {
   const form = await request.formData()
-  const lang = ['ku', 'tr', 'en'].includes(String(form.get('lang'))) ? String(form.get('lang')) : 'ku'
+  const lang = ['ku', 'tr', 'en', 'ru'].includes(String(form.get('lang'))) ? String(form.get('lang')) : 'ku'
   const ok = checkPassword(String(form.get('password') ?? ''))
 
   const target = new URL(ok ? `/${lang}` : `/${lang}?error=1`, request.url)

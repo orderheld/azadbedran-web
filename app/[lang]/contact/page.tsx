@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { ManagerCard, PageIntro, SocialList } from '@/components/sections'
+import { ManagerCard, PageHero, SocialList } from '@/components/sections'
 import { getDict, isLocale } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
 
@@ -16,14 +16,11 @@ export default async function ContactPage({ params }: PageProps<'/[lang]/contact
   const t = getDict(lang)
   return (
     <main>
-      <PageIntro kicker={t.contact.kicker} title={t.contact.title} />
+      <PageHero kicker={t.contact.kicker} title={t.contact.title} lead={t.contact.text} image="/images/azad-warm.jpg" position="50% 30%" />
       <section className="section section-tight">
-        <div className="container contact">
-          <div>
-            <p className="muted lead-sm">{t.contact.text}</p>
-            <SocialList t={t} />
-          </div>
+        <div className="container contact-grid">
           <ManagerCard t={t} />
+          <SocialList t={t} />
         </div>
       </section>
     </main>

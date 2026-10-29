@@ -1,17 +1,25 @@
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { PageHero } from '@/components/sections'
 import { getDict, isLocale } from '@/lib/i18n'
+import { privacy } from '@/lib/legal'
 
 export default async function Page({ params }: PageProps<'/[lang]/datenschutz'>) {
   const { lang } = await params
   if (!isLocale(lang)) notFound()
   const t = getDict(lang)
   return (
-    <main className="legal container">
-      <Link href={`/${lang}`} className="link-arrow">← {t.footer.back}</Link>
-      <h1>{t.footer.privacy}</h1>
-      {/* TODO: Rechtstext einfügen (Verantwortliche Person, Adresse, Kontakt; Hosting: Vercel; Datenbank: Neon; eingebettete Inhalte: YouTube, Deezer/Spotify) */}
-      <p className="muted">—</p>
+    <main>
+      <PageHero kicker="Azad Bedran" title={t.footer.privacy} />
+      <section className="section section-tight">
+        <div className="container legal">
+          {privacy[lang].map((b) => (
+            <section key={b.h}>
+              <h2>{b.h}</h2>
+              {b.p.map((p) => <p key={p}>{p}</p>)}
+            </section>
+          ))}
+        </div>
+      </section>
     </main>
   )
 }

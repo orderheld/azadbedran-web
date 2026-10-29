@@ -6,19 +6,20 @@ const copy = {
   ku: { kicker: 'Malpera fermî', title: 'Di demeke nêzîk de', text: 'Malpera nû ya Azad Bedran tê amadekirin. Heta wê demê, Azad li ser medyaya civakî bişopîne.', label: 'Têketin', placeholder: 'Şîfre', button: 'Têkeve', error: 'Şîfre ne rast e.' },
   tr: { kicker: 'Resmî web sitesi', title: 'Çok yakında', text: 'Azad Bedran’ın yeni web sitesi hazırlanıyor. O zamana kadar Azad’ı sosyal medyada takip edin.', label: 'Giriş', placeholder: 'Şifre', button: 'Giriş', error: 'Şifre yanlış.' },
   en: { kicker: 'Official website', title: 'Coming soon', text: 'Azad Bedran’s new website is on its way. Until then, follow Azad on social media.', label: 'Login', placeholder: 'Password', button: 'Enter', error: 'Wrong password.' },
+  ru: { kicker: 'Официальный сайт', title: 'Скоро открытие', text: 'Новый сайт Азада Бедрана скоро появится. А пока следите за Азадом в социальных сетях.', label: 'Вход', placeholder: 'Пароль', button: 'Войти', error: 'Неверный пароль.' },
 } as const
 type Lang = keyof typeof copy
-const names: Record<Lang, string> = { ku: 'Kurmancî', tr: 'Türkçe', en: 'English' }
+const names: Record<Lang, string> = { ku: 'Kurmancî', tr: 'Türkçe', en: 'English', ru: 'Русский' }
 
 export default async function Soon({ searchParams }: { searchParams: Promise<{ lang?: string; error?: string }> }) {
   const sp = await searchParams
-  const lang: Lang = sp.lang === 'tr' || sp.lang === 'en' ? sp.lang : 'ku'
+  const lang: Lang = sp.lang && sp.lang in copy ? (sp.lang as Lang) : 'ku'
   const t = copy[lang]
 
   return (
     <main className="soon" lang={lang}>
       <div className="soon-photo" aria-hidden>
-        <Image src="/images/hero.jpg" alt="" fill priority sizes="(max-width: 900px) 100vw, 62vw" />
+        <Image src="/images/azad-studio.jpg" alt="" fill priority sizes="(max-width: 900px) 100vw, 62vw" />
       </div>
 
       <header className="soon-top">

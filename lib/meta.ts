@@ -7,7 +7,7 @@ export function pageMeta(lang: Locale, path: string, title: string, description?
     description,
     alternates: {
       canonical: `/${lang}${path}`,
-      languages: { ku: `/ku${path}`, tr: `/tr${path}`, en: `/en${path}`, 'x-default': `/ku${path}` },
+      languages: { ku: `/ku${path}`, tr: `/tr${path}`, en: `/en${path}`, ru: `/ru${path}`, 'x-default': `/ku${path}` },
     },
     openGraph: { title, description, url: `/${lang}${path}` },
   }

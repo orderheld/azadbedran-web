@@ -1,9 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import Cover from '@/components/Cover'
 import { ArrowUpRight } from '@/components/Icons'
-import { stripQuotes } from '@/components/sections'
 import { formatDate, getDict, isLocale, locales } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
 import { href } from '@/lib/routes'
@@ -35,16 +33,16 @@ export default async function NewsArticle({ params }: PageProps<'/[lang]/news/[i
   return (
     <main className="article">
       <div className="container article-inner">
-        <Link href={href(lang, 'news')} className="link-arrow">← {t.more.back}</Link>
+        <Link href={href(lang, 'news')} className="link-arrow">← {t.news.back}</Link>
         <p className="eyebrow article-date">{formatDate(item.date, lang)}</p>
-        <h1 className="display-md">{item.title[lang]}</h1>
-        <div className="article-media">
-          {item.image ? <Image src={item.image} alt="" fill sizes="(max-width: 900px) 100vw, 860px" priority /> : <Cover title={stripQuotes(item.title[lang])} src={null} sizes="860px" />}
-        </div>
+        <h1 className="display">{item.title[lang]}</h1>
+        {item.image && <div className="article-media">
+          <Image src={item.image} alt="" fill sizes="(max-width: 900px) 100vw, 640px" priority />
+        </div>}
         <div className="article-body">
           {item.body[lang].split(/\n\n+/).map((p, i) => <p key={i}>{p}</p>)}
         </div>
-        {item.link && <a className="btn btn-gold" href={item.link} target="_blank" rel="noopener">{t.news.more} <ArrowUpRight size={14} /></a>}
+        {item.link && <a className="btn btn-primary" href={item.link} target="_blank" rel="noopener">{t.news.read} <ArrowUpRight size={14} /></a>}
       </div>
     </main>
   )
