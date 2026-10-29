@@ -32,7 +32,7 @@ a { color: inherit; text-decoration: none; }
 .soon-title { text-align: center; color: var(--glow); font-family: var(--display); font-weight: 700; font-variation-settings: 'opsz' 11; text-transform: none; letter-spacing: .01em; font-size: clamp(1.9rem, 3.6vw, 2.6rem); line-height: 1.15; margin: 0 0 18px; }
 .soon-text { text-align: center; color: #f0e3d0; font-weight: 450; font-size: 1.1rem; line-height: 1.75; margin: 0 auto 30px; max-width: 440px; }
 .soon-social { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 26px; }
-.soon-social a { font-size: .8rem; color: var(--cream); border-bottom: 1px solid transparent; padding-bottom: 3px; transition: border-color .3s, color .3s; }
+.soon-social a { display: inline-flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--cream); border-bottom: 1px solid transparent; padding-bottom: 3px; transition: border-color .3s, color .3s; }
 .soon-social a:hover { color: var(--gold); border-color: var(--gold); }
 
 .soon-login { width: min(400px, 100%); }
@@ -45,7 +45,9 @@ a { color: inherit; text-decoration: none; }
 .soon-field button:hover { background: var(--glow); }
 .soon-error { color: #e9a08c; font-size: .85rem; margin: 10px 0 0 18px; }
 
-.kilim { position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: url('/brand/kilim.svg') repeat-x center / auto 10px; opacity: .9; }
+.soon-credit { position: relative; z-index: 2; margin: 28px 0 0; text-align: center; font-size: .82rem; letter-spacing: .04em; color: var(--muted, #c2af99); }
+.soon-credit a { color: var(--amber, #e0a35e); }
+.soon-credit a:hover { color: #f5cd8f; }
 
 @media (max-width: 900px) {
   .soon-photo { inset: 0 0 auto 0; height: 60svh; -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent); mask-image: linear-gradient(180deg, #000 45%, transparent); }

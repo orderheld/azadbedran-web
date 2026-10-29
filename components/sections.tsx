@@ -1,9 +1,10 @@
+import BrandIcon from './BrandIcon'
 import Image from 'next/image'
 import Link from 'next/link'
 import YouTubeLite from './YouTubeLite'
 import { ChooseButton, PlayButton } from './Player'
 import { CoverImage, ReleaseCard, type ReleaseView } from './Release'
-import { ArrowRight, ArrowUpRight, Chat, Phone, Pin, Ticket } from './Icons'
+import { ArrowRight, ArrowUpRight, Phone, Pin, Ticket } from './Icons'
 import { countryName, dateParts, formatDate, type Dict, type Locale } from '@/lib/i18n'
 import { href } from '@/lib/routes'
 import { coverUrl } from '@/lib/links'
@@ -154,7 +155,7 @@ export function PlatformStrip({ t }: { t: Dict }) {
       <p className="eyebrow">{t.platforms}</p>
       <ul>
         {streamingPlatforms().map((p) => (
-          <li key={p.id}><a href={p.url} target="_blank" rel="noopener">{p.label}</a></li>
+          <li key={p.id}><a href={p.url} target="_blank" rel="noopener"><BrandIcon id={p.id} size={22} />{p.label}</a></li>
         ))}
       </ul>
     </div>
@@ -216,7 +217,7 @@ export function ManagerCard({ t }: { t: Dict }) {
         <h3 className="display">{manager.name}</h3>
         <p className="manager-phone"><a href={telUrl}>{manager.phone}</a></p>
         <div className="btn-row">
-          <a className="btn btn-primary" href={whatsappUrl} target="_blank" rel="noopener"><Chat size={17} /> {t.contact.whatsapp}</a>
+          <a className="btn btn-primary" href={whatsappUrl} target="_blank" rel="noopener"><BrandIcon id="whatsapp" size={17} mono /> {t.contact.whatsapp}</a>
           <a className="btn btn-ghost" href={telUrl}><Phone size={16} /> {t.contact.call}</a>
         </div>
       </div>
@@ -231,7 +232,7 @@ export function SocialList({ t }: { t: Dict }) {
       <ul>
         {site.socials.map((s) => (
           <li key={s.id}>
-            <a href={s.url} target="_blank" rel="noopener"><span>{s.label}</span><span className="muted">{s.handle}</span><ArrowUpRight size={16} /></a>
+            <a href={s.url} target="_blank" rel="noopener"><BrandIcon id={s.id} size={24} /><span>{s.label}</span><span className="muted">{s.handle}</span><ArrowUpRight size={16} /></a>
           </li>
         ))}
       </ul>

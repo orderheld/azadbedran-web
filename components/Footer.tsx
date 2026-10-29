@@ -3,6 +3,7 @@ import { type Dict, type Locale } from '@/lib/i18n'
 import { href, pages } from '@/lib/routes'
 import { manager, site, streamingPlatforms, telUrl, whatsappUrl } from '@/lib/site'
 import Logo from './Logo'
+import BrandIcon from './BrandIcon'
 
 export default function Footer({ lang, t }: { lang: Locale; t: Dict }) {
   return (
@@ -17,18 +18,18 @@ export default function Footer({ lang, t }: { lang: Locale; t: Dict }) {
             </div>
             <div>
               <p className="eyebrow">{t.platforms}</p>
-              <ul>{streamingPlatforms().map((p) => <li key={p.id}><a href={p.url} target="_blank" rel="noopener">{p.label}</a></li>)}</ul>
+              <ul>{streamingPlatforms().map((p) => <li key={p.id}><a href={p.url} target="_blank" rel="noopener"><BrandIcon id={p.id} size={16} />{p.label}</a></li>)}</ul>
             </div>
             <div>
               <p className="eyebrow">{t.contact.follow}</p>
-              <ul>{site.socials.map((s) => <li key={s.id}><a href={s.url} target="_blank" rel="noopener">{s.label}</a></li>)}</ul>
+              <ul>{site.socials.map((s) => <li key={s.id}><a href={s.url} target="_blank" rel="noopener"><BrandIcon id={s.id} size={16} />{s.label}</a></li>)}</ul>
             </div>
             <div>
               <p className="eyebrow">{t.contact.role}</p>
               <ul>
                 <li>{manager.name}</li>
                 <li><a href={telUrl}>{manager.phone}</a></li>
-                <li><a href={whatsappUrl} target="_blank" rel="noopener">{t.contact.whatsapp}</a></li>
+                <li><a href={whatsappUrl} target="_blank" rel="noopener"><BrandIcon id="whatsapp" size={16} />{t.contact.whatsapp}</a></li>
               </ul>
             </div>
           </div>
@@ -39,9 +40,9 @@ export default function Footer({ lang, t }: { lang: Locale; t: Dict }) {
             <Link href={`/${lang}/impressum`}>{t.footer.imprint}</Link>
             <Link href={`/${lang}/datenschutz`}>{t.footer.privacy}</Link>
           </p>
+          <p className="credit">Webdesign <a href="https://webnova.ch" target="_blank" rel="noopener">Webnova</a></p>
         </div>
       </div>
-      <div className="kilim" aria-hidden />
     </footer>
   )
 }

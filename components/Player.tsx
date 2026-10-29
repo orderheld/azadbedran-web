@@ -1,6 +1,7 @@
 'use client'
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
 import { coverUrl, platformLinks } from '@/lib/links'
+import BrandIcon from './BrandIcon'
 import type { Dict } from '@/lib/i18n'
 import { ArrowUpRight, Close, Headphones, Next, Pause, Play, Prev } from './Icons'
 
@@ -157,7 +158,7 @@ export function PlayerProvider({ queue: defaultQueue, t, children }: { queue: Pl
                   {platformLinks(chooser).filter((l) => l.kind === kind).map((l) => (
                     <li key={l.id}>
                       <a href={l.url} target="_blank" rel="noopener" className={`platform p-${l.id}`}>
-                        <span className="platform-dot" aria-hidden />
+                        <BrandIcon id={l.id} size={22} />
                         {l.label}
                         <ArrowUpRight size={16} />
                       </a>

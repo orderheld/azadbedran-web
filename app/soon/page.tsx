@@ -1,3 +1,4 @@
+import BrandIcon from '@/components/BrandIcon'
 import Image from 'next/image'
 import Logo from '@/components/Logo'
 import { site } from '@/lib/site'
@@ -38,7 +39,7 @@ export default async function Soon({ searchParams }: { searchParams: Promise<{ l
         <p className="soon-text">{t.text}</p>
         <ul className="soon-social">
           {site.socials.map((s) => (
-            <li key={s.id}><a className="caps" href={s.url} target="_blank" rel="noopener">{s.label}</a></li>
+            <li key={s.id}><a className="caps" href={s.url} target="_blank" rel="noopener"><BrandIcon id={s.id} size={18} />{s.label}</a></li>
           ))}
         </ul>
       </section>
@@ -53,7 +54,7 @@ export default async function Soon({ searchParams }: { searchParams: Promise<{ l
         {sp.error && <p className="soon-error" role="alert">{t.error}</p>}
       </form>
 
-      <div className="kilim" aria-hidden />
+      <p className="soon-credit">Webdesign <a href="https://webnova.ch" target="_blank" rel="noopener">Webnova</a></p>
     </main>
   )
 }

@@ -171,7 +171,8 @@ h3 { font-family: var(--sans); font-weight: 700; color: var(--cream); margin: 0;
 .platform-strip { border-block: 1px solid var(--line); padding: 22px var(--gutter); display: flex; align-items: center; justify-content: center; gap: 12px 32px; flex-wrap: wrap; background: var(--bg-2); }
 .platform-strip .eyebrow { margin: 0; color: var(--muted); }
 .platform-strip ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 28px; }
-.platform-strip a { font-weight: 700; color: var(--cream); font-size: 1rem; transition: color 0.3s; }
+.brand-icon { flex: none; display: block; }
+.platform-strip a { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; color: var(--cream); font-size: 1rem; transition: color 0.3s; }
 .platform-strip a:hover { color: var(--glow); }
 
 /* Neueste Veröffentlichung */
@@ -344,7 +345,7 @@ h3 { font-family: var(--sans); font-weight: 700; color: var(--cream); margin: 0;
 .manager .btn-row { margin-top: 20px; }
 @media (max-width: 560px) { .manager { grid-template-columns: 1fr; } .manager-photo { max-width: 220px; } }
 .social-list ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.social-list a { display: grid; grid-template-columns: 1fr auto auto; gap: 16px; align-items: center; padding: 18px 4px; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 1.1rem; color: var(--cream); transition: color 0.3s; }
+.social-list a { display: grid; grid-template-columns: auto 1fr auto auto; gap: 16px; align-items: center; padding: 18px 4px; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 1.1rem; color: var(--cream); transition: color 0.3s; }
 .social-list a:hover { color: var(--glow); }
 
 /* Galerie */
@@ -398,16 +399,9 @@ body:has(.mini-player) .site-footer { padding-bottom: 96px; }
 .chooser-group + .chooser-group { margin-top: 22px; }
 .chooser-group .eyebrow { color: var(--muted); font-size: 0.72rem; margin-bottom: 8px; }
 .chooser-group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.platform { display: grid; grid-template-columns: 12px 1fr auto; gap: 14px; align-items: center; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--line); background: rgba(243, 230, 211, 0.03); font-weight: 700; color: var(--cream); transition: border-color 0.3s, background 0.3s, transform 0.3s var(--ease); }
+.platform { display: grid; grid-template-columns: 22px 1fr auto; gap: 14px; align-items: center; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--line); background: rgba(243, 230, 211, 0.03); font-weight: 700; color: var(--cream); transition: border-color 0.3s, background 0.3s, transform 0.3s var(--ease); }
 .platform:hover { border-color: var(--amber); background: rgba(224, 163, 94, 0.08); transform: translateX(3px); }
-.platform svg { color: var(--muted); }
-.platform-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); }
-.p-spotify .platform-dot { background: #1ed760; }
-.p-apple .platform-dot, .p-itunes .platform-dot { background: #fa4a62; }
-.p-youtube-music .platform-dot { background: #ff2a2a; }
-.p-deezer .platform-dot { background: #a238ff; }
-.p-amazon .platform-dot, .p-amazon-buy .platform-dot { background: #25d1da; }
-.p-tidal .platform-dot { background: #f3e6d3; }
+.platform > svg:last-child { color: var(--muted); }
 @media (max-width: 560px) {
   .chooser { align-items: flex-end; padding: 0; }
   .chooser-panel { border-radius: 22px 22px 0 0; width: 100%; padding: 24px 20px calc(24px + env(safe-area-inset-bottom)); }
@@ -429,10 +423,12 @@ body:has(.mini-player) .site-footer { padding-bottom: 96px; }
 .footer-cols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .footer-cols a, .footer-cols li { font-size: 0.95rem; color: var(--text); transition: color 0.3s; }
 .footer-cols a:hover { color: var(--glow); }
+.footer-cols a { display: inline-flex; align-items: center; gap: 9px; }
 .footer-bottom { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--muted); font-size: 0.88rem; }
 .footer-bottom p { margin: 0; display: flex; gap: 20px; }
 .footer-bottom a:hover { color: var(--cream); }
-.kilim { position: absolute; left: 0; right: 0; bottom: 0; height: 8px; background: url('/brand/kilim.svg') repeat-x center / auto 8px; opacity: 0.85; }
+.footer-bottom .credit { gap: 6px; }
+.footer-bottom .credit a { color: var(--amber); }
 @media (max-width: 960px) { .footer-top { grid-template-columns: 1fr; } .footer-logo svg { max-width: 220px; } .footer-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
