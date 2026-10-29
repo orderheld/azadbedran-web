@@ -39,7 +39,7 @@ export default function Footer({ lang, t }: { lang: Locale; t: Dict }) {
             <Link href={`/${lang}/impressum`}>{t.footer.imprint}</Link>
             <Link href={`/${lang}/datenschutz`}>{t.footer.privacy}</Link>
           </p>
-          <p className="credit">Webdesign bei <a href="https://webnova.ch" target="_blank" rel="noopener">Webnova</a></p>
+          <p className="credit">Webdesign by <a href="https://webnova.ch" target="_blank" rel="noopener">Webnova</a></p>
         </div>
       </div>
     </footer>

@@ -53,7 +53,7 @@ export default async function Soon({ params, searchParams }: { params: Promise<{
         {sp.error && <p className="soon-error" role="alert">{t.error}</p>}
       </form>
 
-      <p className="soon-credit">Webdesign bei <a href="https://webnova.ch" target="_blank" rel="noopener">Webnova</a></p>
+      <p className="soon-credit">Webdesign by <a href="https://webnova.ch" target="_blank" rel="noopener">Webnova</a></p>
     </main>
   )
 }
