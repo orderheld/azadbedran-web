@@ -29,8 +29,8 @@ a { color: inherit; text-decoration: none; }
 .soon-rule::before, .soon-rule::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
 .soon-rule::after { background: linear-gradient(90deg, var(--gold), transparent); }
 .soon-rule span { width: 8px; height: 8px; background: var(--gold); transform: rotate(45deg); }
-.soon-title { text-align: center; color: var(--glow); font-family: var(--display); font-variation-settings: 'opsz' 96; font-weight: 500; text-transform: none; letter-spacing: .01em; font-size: clamp(1.9rem, 3.6vw, 2.6rem); line-height: 1.15; margin: 0 0 18px; }
-.soon-text { text-align: center; color: #e6d7c2; font-size: 1.08rem; line-height: 1.75; margin: 0 auto 30px; max-width: 440px; }
+.soon-title { text-align: center; color: var(--glow); font-family: var(--display); font-weight: 700; font-variation-settings: 'opsz' 11; text-transform: none; letter-spacing: .01em; font-size: clamp(1.9rem, 3.6vw, 2.6rem); line-height: 1.15; margin: 0 0 18px; }
+.soon-text { text-align: center; color: #f0e3d0; font-weight: 450; font-size: 1.1rem; line-height: 1.75; margin: 0 auto 30px; max-width: 440px; }
 .soon-social { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 26px; }
 .soon-social a { font-size: .8rem; color: var(--cream); border-bottom: 1px solid transparent; padding-bottom: 3px; transition: border-color .3s, color .3s; }
 .soon-social a:hover { color: var(--gold); border-color: var(--gold); }

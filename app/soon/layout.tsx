@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import '@fontsource-variable/bodoni-moda/opsz.css'
 import '@fontsource-variable/manrope'
-import '@fontsource/playfair-display/cyrillic-500.css'
+import '@fontsource/playfair-display/cyrillic-700.css'
 import './soon.css'
 
 export const metadata: Metadata = {
