@@ -7,7 +7,7 @@ export const localeNames: Record<Locale, string> = { ku: 'Kurmancî', tr: 'Türk
 export const htmlLang: Record<Locale, string> = { ku: 'ku', tr: 'tr', en: 'en', ru: 'ru' }
 
 const months: Record<Locale, string[]> = {
-  ku: ['Rêbendan', 'Reşemî', 'Adar', 'Avrêl', 'Gulan', 'Pûşper', 'Tîrmeh', 'Gelawêj', 'Rezber', 'Kewçêr', 'Sermawez', 'Berfanbar'],
+  ku: ['Çile', 'Sibat', 'Adar', 'Nîsan', 'Gulan', 'Hezîran', 'Tîrmeh', 'Tebax', 'Îlon', 'Cotmeh', 'Mijdar', 'Kanûn'],
   tr: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
   en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
   ru: ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'],
@@ -156,7 +156,7 @@ const ku = {
       {
         h: 'Ji Sêwregê heta Amedê',
         p: [
-          'Azad Bedran stranbêj, stranivîs û sazbendekî kurd e ku navê wî bi Amedê re tê nasîn. Ew di 2ê Reşemiya 1993an de li Sêwrega Rihayê hatiye dinyayê. Beşek ji zarokatiya wî li Tarsûsê derbas bûye; paşê malbata wî li Amedê bi cih bûye – bajarê ku muzîka wî lê gihaye.',
+          'Azad Bedran stranbêj, stranivîs û sazbendekî kurd e ku navê wî bi Amedê re tê nasîn. Ew di 2ê Sibata 1993an de li Sêwrega Rihayê hatiye dinyayê. Beşek ji zarokatiya wî li Tarsûsê derbas bûye; paşê malbata wî li Amedê bi cih bûye – bajarê ku muzîka wî lê gihaye.',
         ],
       },
       {
@@ -169,7 +169,7 @@ const ku = {
       {
         h: 'Albûma yekem û “Aç Kaldık Özgürlüğe”',
         p: [
-          'Di 2016an de albûma wî ya yekem a solo, Rêwiyên Şad, bi 14 stranan ji labela Kom Müzikê derket. Albûm stranên gelêrî yên anonîm û berhemên wî bi xwe digihîne hev û bi Hozan Comerd, Farqîn Azad û Xalê Seyitxan re duet tê de hene. Di 2018an de strana “Aç Kaldık Özgürlüğe” – ku Selahattin Demirtaş li girtîgeha Edirneyê nivîsandibû – bi dengê xwe tomar kir; klîpa wê di 1ê Kewçêra 2018an de hate weşandin.',
+          'Di 2016an de albûma wî ya yekem a solo, Rêwiyên Şad, bi 14 stranan ji labela Kom Müzikê derket. Albûm stranên gelêrî yên anonîm û berhemên wî bi xwe digihîne hev û bi Hozan Comerd, Farqîn Azad û Xalê Seyitxan re duet tê de hene. Di 2018an de strana “Aç Kaldık Özgürlüğe” – ku Selahattin Demirtaş li girtîgeha Edirneyê nivîsandibû – bi dengê xwe tomar kir; klîpa wê di 1ê Cotmeha 2018an de hate weşandin.',
         ],
       },
       {
@@ -187,7 +187,7 @@ const ku = {
       {
         h: 'Li ser sahneyê',
         p: [
-          'Azad Bedran li Amed, Stenbol, Adana, Bursa, Êlih, Sêrt û Îzmîrê konser dane; li derveyî welat jî li Ewropa, Rûsya, Ermenistan û Qazaxistanê derketiye ser sahneyê. Di Newroza 2025an de li Erdîşa Wanê û li Colemêrgê stran gotin, û di 14ê Berfanbara 2025an de li Kolnê (Almanya) di salona Sartoryê de konser da. Di Tîrmeha 2026an de albûma zindî Evîna Azad (Live) bi 13 stranan derket. Di Sermawezê 2026an de li Sankt Petersburg, Parîs, Reims û Kielê konser dide.',
+          'Azad Bedran li Amed, Stenbol, Adana, Bursa, Êlih, Sêrt û Îzmîrê konser dane; li derveyî welat jî li Ewropa, Rûsya, Ermenistan û Qazaxistanê derketiye ser sahneyê. Di Newroza 2025an de li Erdîşa Wanê û li Colemêrgê stran gotin, û di 14ê Kanûna 2025an de li Kolnê (Almanya) di salona Sartoryê de konser da. Di Tîrmeha 2026an de albûma zindî Evîna Azad (Live) bi 13 stranan derket. Di Mijdarê 2026an de li Sankt Petersburg, Parîs, Reims û Kielê konser dide.',
         ],
       },
     ],

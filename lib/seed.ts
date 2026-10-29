@@ -53,9 +53,9 @@ export const seedNews: NewsItem[] = [
   {
     id: 5,
     date: '2026-10-29',
-    title: { ku: 'Konserên Sermawezê: Rûsya, Fransa, Almanya', tr: 'Kasım konserleri: Rusya, Fransa, Almanya', en: 'November concerts: Russia, France, Germany', ru: 'Ноябрьские концерты: Россия, Франция, Германия' },
+    title: { ku: 'Konserên Mijdarê: Rûsya, Fransa, Almanya', tr: 'Kasım konserleri: Rusya, Fransa, Almanya', en: 'November concerts: Russia, France, Germany', ru: 'Ноябрьские концерты: Россия, Франция, Германия' },
     body: {
-      ku: 'Azad Bedran di Sermawezê de li çar bajaran derdikeve ser sahneyê: 15ê Sermawezê li Sankt Petersburgê, 27ê li Parîsê, 28ê li Reimsê û 29ê li Kielê. Konsera Sankt Petersburgê li Restoran „Skazka Vostoka – 1001 Noç“ (Lesnoy prospekt 48) ye, deriyên salonê saet 19:00an vedibin; ji bo cih rezervekirinê: +7 981 717-60-62 an +7 812 295-31-05. Cih û bilêtên Parîs, Reims û Kielê dê di demeke nêzîk de werin ragihandin.',
+      ku: 'Azad Bedran di Mijdarê de li çar bajaran derdikeve ser sahneyê: 15ê Mijdarê li Sankt Petersburgê, 27ê li Parîsê, 28ê li Reimsê û 29ê li Kielê. Konsera Sankt Petersburgê li Restoran „Skazka Vostoka – 1001 Noç“ (Lesnoy prospekt 48) ye, deriyên salonê saet 19:00an vedibin; ji bo cih rezervekirinê: +7 981 717-60-62 an +7 812 295-31-05. Cih û bilêtên Parîs, Reims û Kielê dê di demeke nêzîk de werin ragihandin.',
       tr: 'Azad Bedran kasımda dört şehirde sahnede: 15 Kasım St. Petersburg, 27 Kasım Paris, 28 Kasım Reims ve 29 Kasım Kiel. St. Petersburg konseri Restoran „Skazka Vostoka – 1001 Noç“ta (Lesnoy prospekt 48); kapılar 19:00’da açılıyor, rezervasyon: +7 981 717-60-62 veya +7 812 295-31-05. Paris, Reims ve Kiel için mekân ve bilet bilgileri yakında duyurulacak.',
       en: 'Azad Bedran plays four cities in November: St. Petersburg on 15 November, Paris on the 27th, Reims on the 28th and Kiel on the 29th. The St. Petersburg show is at Restaurant “Skazka Vostoka – 1001 Nights” (Lesnoy prospekt 48), doors at 7 pm, reservations on +7 981 717-60-62 or +7 812 295-31-05. Venues and tickets for Paris, Reims and Kiel will be announced soon.',
       ru: 'В ноябре Азад Бедран выступит в четырёх городах: 15 ноября в Санкт-Петербурге, 27-го в Париже, 28-го в Реймсе и 29-го в Киле. Концерт в Санкт-Петербурге пройдёт в ресторане «Сказка Востока 1001 Ночь» (Лесной проспект, 48), сбор гостей в 19:00, бронирование столов: +7 981 717-60-62 или +7 812 295-31-05. Площадки и билеты в Париже, Реймсе и Киле будут объявлены в ближайшее время.',
@@ -68,7 +68,7 @@ export const seedNews: NewsItem[] = [
     date: '2026-10-08',
     title: { ku: 'Single ya nû: “Ez Dînim”', tr: 'Yeni single: “Ez Dînim”', en: 'New single: “Ez Dînim”', ru: 'Новый сингл «Ez Dînim»' },
     body: {
-      ku: 'Strana nû ya Azad Bedran “Ez Dînim” ji 8ê Kewçêra 2026an ve li ser hemû platformên muzîkê ye. Li vir guhdarî bike û platforma xwe hilbijêre.',
+      ku: 'Strana nû ya Azad Bedran “Ez Dînim” ji 8ê Cotmeha 2026an ve li ser hemû platformên muzîkê ye. Li vir guhdarî bike û platforma xwe hilbijêre.',
       tr: 'Azad Bedran’ın yeni şarkısı “Ez Dînim” 8 Ekim 2026’dan beri tüm dijital platformlarda. Buradan dinleyebilir, platformunu seçebilirsin.',
       en: 'Azad Bedran’s new single “Ez Dînim” has been out on every streaming platform since 8 October 2026. Listen here and pick your platform.',
       ru: 'Новый сингл Азада Бедрана «Ez Dînim» доступен на всех стриминговых платформах с 8 октября 2026 года. Слушайте здесь и выбирайте свою платформу.',
@@ -81,7 +81,7 @@ export const seedNews: NewsItem[] = [
     date: '2026-09-24',
     title: { ku: 'Bi Suleyman re: “Tu Çîrokek Bê Hempa”', tr: 'Suleyman ile: “Tu Çîrokek Bê Hempa”', en: 'With Suleyman: “Tu Çîrokek Bê Hempa”', ru: 'С Сулейманом: «Tu Çîrokek Bê Hempa»' },
     body: {
-      ku: 'Azad Bedran û Suleyman strana hevpar “Tu Çîrokek Bê Hempa” di 24ê Rezbera 2026an de weşandin.',
+      ku: 'Azad Bedran û Suleyman strana hevpar “Tu Çîrokek Bê Hempa” di 24ê Îlona 2026an de weşandin.',
       tr: 'Azad Bedran ve Suleyman’ın birlikte seslendirdiği “Tu Çîrokek Bê Hempa” 24 Eylül 2026’da yayımlandı.',
       en: 'Azad Bedran and Suleyman released their joint single “Tu Çîrokek Bê Hempa” on 24 September 2026.',
       ru: 'Азад Бедран и Сулейман выпустили совместный сингл «Tu Çîrokek Bê Hempa» 24 сентября 2026 года.',
