@@ -80,7 +80,20 @@ function inferType(title: string, platformType: string, trackCount?: number): Re
 // Diskografie mit Original-Covern direkt von den Plattformen:
 // 1. Deezer (Cover 1000 px), 2. Apple Music / iTunes (Cover 1200 px), 3. Startdaten aus lib/seed.ts
 export async function getReleases(): Promise<Release[]> {
-  return (await fromDeezer()) ?? (await fromItunes()) ?? seedReleases
+  const list = (await fromDeezer()) ?? (await fromItunes()) ?? seedReleases
+  return dedupe(list)
+}
+
+// Plattformen führen Neuauflagen teils als eigenes Album (z. B. „Rêwiyên Şad“ 2016 und 2022).
+// Pro Titel bleibt die Erstveröffentlichung stehen.
+function dedupe(list: Release[]): Release[] {
+  const first = new Map<string, Release>()
+  for (const r of list) {
+    const key = `${r.type === 'single' ? 's' : 'a'}:${normalize(r.title)}`
+    const seen = first.get(key)
+    if (!seen || r.date < seen.date) first.set(key, { ...r, cover: r.cover ?? seen?.cover ?? null })
+  }
+  return [...first.values()].sort((a, b) => b.date.localeCompare(a.date))
 }
 
 async function fromDeezer(): Promise<Release[] | null> {
