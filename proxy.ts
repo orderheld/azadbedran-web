@@ -1,30 +1,25 @@
 import { NextResponse, type NextRequest } from 'next/server'
+import { GATE_COOKIE, accessToken, gateEnabled } from './lib/gate'
 
 const locales = ['ku', 'tr', 'en'] as const
 
-function pickLocale(header: string | null): (typeof locales)[number] {
-  const langs = (header ?? '')
-    .split(',')
-    .map((part) => part.split(';')[0].trim().toLowerCase())
-  for (const l of langs) {
-    if (l.startsWith('ku') || l.startsWith('kmr')) return 'ku'
-    if (l.startsWith('tr')) return 'tr'
-    if (l.startsWith('en')) return 'en'
-  }
-  return 'ku'
-}
-
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const hasLocale = locales.some((l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`))
-  if (hasLocale) return
+  const match = pathname.match(/^\/(ku|tr|en)(\/|$)/)
 
-  const locale = pickLocale(request.headers.get('accept-language'))
-  request.nextUrl.pathname = `/${locale}${pathname === '/' ? '' : pathname}`
+  if (gateEnabled() && request.cookies.get(GATE_COOKIE)?.value !== (await accessToken())) {
+    const url = request.nextUrl.clone()
+    url.pathname = '/soon'
+    url.searchParams.set('lang', match?.[1] ?? 'ku')
+    return NextResponse.rewrite(url, { headers: { 'X-Robots-Tag': 'noindex' } })
+  }
+
+  if (match || pathname === '/soon') return
+  // Erste Sprache ist immer Kurmancî
+  request.nextUrl.pathname = `/${locales[0]}${pathname === '/' ? '' : pathname}`
   return NextResponse.redirect(request.nextUrl)
 }
 
 export const config = {
-  // Skip Next internals, API routes and any file with an extension (images, robots.txt, sitemap.xml …)
   matcher: ['/((?!_next|api|.*\\..*).*)'],
 }
