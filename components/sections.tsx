@@ -155,7 +155,7 @@ export function PlatformStrip({ t }: { t: Dict }) {
       <p className="eyebrow">{t.platforms}</p>
       <ul>
         {streamingPlatforms().map((p) => (
-          <li key={p.id}><a href={p.url} target="_blank" rel="noopener"><BrandIcon id={p.id} size={22} />{p.label}</a></li>
+          <li key={p.id}><a href={p.url} target="_blank" rel="noopener"><BrandIcon id={p.id} size={18} mono />{p.label}</a></li>
         ))}
       </ul>
     </div>
@@ -232,7 +232,7 @@ export function SocialList({ t }: { t: Dict }) {
       <ul>
         {site.socials.map((s) => (
           <li key={s.id}>
-            <a href={s.url} target="_blank" rel="noopener"><BrandIcon id={s.id} size={24} /><span>{s.label}</span><span className="muted">{s.handle}</span><ArrowUpRight size={16} /></a>
+            <a href={s.url} target="_blank" rel="noopener"><span>{s.label}</span><span className="muted">{s.handle}</span><ArrowUpRight size={16} /></a>
           </li>
         ))}
       </ul>

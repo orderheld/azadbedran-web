@@ -1,4 +1,3 @@
-import BrandIcon from '@/components/BrandIcon'
 import Image from 'next/image'
 import Logo from '@/components/Logo'
 import { site } from '@/lib/site'
@@ -39,7 +38,7 @@ export default async function Soon({ searchParams }: { searchParams: Promise<{ l
         <p className="soon-text">{t.text}</p>
         <ul className="soon-social">
           {site.socials.map((s) => (
-            <li key={s.id}><a className="caps" href={s.url} target="_blank" rel="noopener"><BrandIcon id={s.id} size={18} />{s.label}</a></li>
+            <li key={s.id}><a className="caps" href={s.url} target="_blank" rel="noopener">{s.label}</a></li>
           ))}
         </ul>
       </section>

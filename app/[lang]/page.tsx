@@ -30,7 +30,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
   const queue = latestQueue(releases)
 
   return (
-    <main>
+    <main className="home">
       <ArtistJsonLd upcoming={upcoming} />
 
       <section className="hero">

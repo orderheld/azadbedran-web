@@ -9,7 +9,7 @@ export default function BrandIcon({ id, size = 20, mono = false }: { id: string;
   const color = mono ? 'currentColor' : onDark[id] ?? b.hex
   if (b.svg48) {
     return (
-      <svg className="brand-icon" width={size} height={size} viewBox="0 0 48 48" aria-hidden style={{ color }} strokeWidth={4.2}
+      <svg className="brand-icon" width={size} height={size} viewBox="0 0 48 48" aria-hidden style={mono ? undefined : { color }} strokeWidth={4.2}
         dangerouslySetInnerHTML={{ __html: b.svg48 }} />
     )
   }

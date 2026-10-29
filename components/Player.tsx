@@ -158,7 +158,7 @@ export function PlayerProvider({ queue: defaultQueue, t, children }: { queue: Pl
                   {platformLinks(chooser).filter((l) => l.kind === kind).map((l) => (
                     <li key={l.id}>
                       <a href={l.url} target="_blank" rel="noopener" className={`platform p-${l.id}`}>
-                        <BrandIcon id={l.id} size={22} />
+                        <BrandIcon id={l.id} size={18} mono />
                         {l.label}
                         <ArrowUpRight size={16} />
                       </a>
