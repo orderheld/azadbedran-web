@@ -45,7 +45,7 @@ a { color: inherit; text-decoration: none; }
 .soon-field button:hover { background: var(--glow); }
 .soon-error { color: #e9a08c; font-size: .85rem; margin: 10px 0 0 18px; }
 
-.soon-credit { position: relative; z-index: 2; margin: 28px 0 0; text-align: center; font-size: .82rem; letter-spacing: .04em; color: var(--muted, #c2af99); }
+.soon-credit { white-space: nowrap; position: relative; z-index: 2; margin: 28px 0 0; text-align: center; font-size: .82rem; letter-spacing: .04em; color: var(--muted, #c2af99); }
 .soon-credit a { color: var(--amber, #e0a35e); }
 .soon-credit a:hover { color: #f5cd8f; }
 

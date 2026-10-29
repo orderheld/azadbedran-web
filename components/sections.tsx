@@ -1,4 +1,6 @@
 import BrandIcon from './BrandIcon'
+import ShareButton from './ShareButton'
+import { shareLabels } from '@/lib/seo'
 import Image from 'next/image'
 import Link from 'next/link'
 import YouTubeLite from './YouTubeLite'
@@ -11,6 +13,7 @@ import { coverUrl } from '@/lib/links'
 import { manager, site, streamingPlatforms, telUrl, whatsappUrl } from '@/lib/site'
 import type { Concert, NewsItem } from '@/lib/seed'
 import type { Video } from '@/lib/videos'
+import type { Release } from '@/lib/music'
 
 type Base = { t: Dict; lang: Locale }
 
@@ -89,6 +92,7 @@ export function NextShow({ c, t, lang, more }: Base & { c: Concert; more?: boole
         <div className="btn-row">
           <ConcertAction c={c} t={t} />
           {c.phone && <span className="muted small">{c.phone}</span>}
+          <ShareButton url={href(lang, 'concerts')} title={`Azad Bedran – ${c.city} · ${formatDate(c.date, lang)}`} label={shareLabels[lang].share} copied={shareLabels[lang].copied} />
           {more && <MoreLink to={href(lang, 'concerts')} label={t.concerts.more} />}
         </div>
       </div>
@@ -240,25 +244,58 @@ export function SocialList({ t }: { t: Dict }) {
   )
 }
 
-export function ArtistJsonLd({ upcoming }: { upcoming: Concert[] }) {
+// Zeitzone der Konzertorte (Winterzeit), damit Google die Uhrzeit richtig anzeigt
+const tz: Record<string, string> = { TR: '+03:00', RU: '+03:00', FR: '+01:00', DE: '+01:00', CH: '+01:00', AT: '+01:00', NL: '+01:00', BE: '+01:00', SE: '+01:00', GB: '+00:00' }
+
+export function ArtistJsonLd({ upcoming, releases, lang, description }: { upcoming: Concert[]; releases: Release[]; lang: Locale; description: string }) {
+  const abs = (u: string) => (u.startsWith('http') ? u : `${site.url}${u}`)
+  const artist = { '@id': `${site.url}/#artist` }
   const data = {
     '@context': 'https://schema.org',
-    '@type': 'MusicGroup',
-    name: site.name,
-    url: site.url,
-    image: `${site.url}/og.jpg`,
-    genre: 'Kurdish music',
-    foundingLocation: 'Diyarbakır',
-    sameAs: [...site.socials.map((s) => s.url), ...streamingPlatforms().map((p) => p.url)],
-    event: upcoming.map((c) => ({
-      '@type': 'MusicEvent',
-      name: `Azad Bedran – ${c.city}`,
-      startDate: c.time ? `${c.date}T${c.time}` : c.date,
-      eventStatus: 'https://schema.org/EventScheduled',
-      location: { '@type': 'Place', name: c.venue ?? c.city, address: { '@type': 'PostalAddress', streetAddress: c.address ?? undefined, addressLocality: c.city, addressCountry: c.country } },
-      performer: { '@type': 'MusicGroup', name: site.name },
-      ...(c.ticketUrl ? { offers: { '@type': 'Offer', url: c.ticketUrl } } : {}),
-    })),
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': `${site.url}/#website`,
+        url: site.url,
+        name: site.name,
+        inLanguage: ['ku', 'tr', 'en', 'ru'],
+        publisher: artist,
+      },
+      {
+        '@type': 'MusicGroup',
+        ...artist,
+        name: site.name,
+        alternateName: 'Азад Бедран',
+        url: `${site.url}/${lang}`,
+        description,
+        image: [abs(`/og/${lang}.jpg`), abs('/images/azad-portrait-close.jpg')],
+        genre: ['Kurdish music', 'Kurdish folk', 'Dengbêj'],
+        foundingLocation: { '@type': 'Place', name: 'Diyarbakır (Amed)', address: { '@type': 'PostalAddress', addressCountry: 'TR' } },
+        sameAs: [...site.socials.map((s) => s.url), ...streamingPlatforms().map((p) => p.url)],
+        album: releases.filter((r) => r.type !== 'single').map((r) => ({
+          '@type': 'MusicAlbum',
+          name: r.title,
+          datePublished: r.date,
+          url: r.appleUrl,
+          image: coverUrl(r.art, 600),
+          numTracks: r.tracks,
+          byArtist: artist,
+        })),
+        event: upcoming.map((c) => ({
+          '@type': 'MusicEvent',
+          name: `Azad Bedran – ${c.city}`,
+          url: `${site.url}/${lang}/concerts`,
+          startDate: c.time ? `${c.date}T${c.time}:00${tz[c.country] ?? ''}` : c.date,
+          eventStatus: 'https://schema.org/EventScheduled',
+          eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+          ...(c.poster ? { image: [abs(c.poster)] } : {}),
+          location: { '@type': 'Place', name: c.venue ?? c.city, address: { '@type': 'PostalAddress', streetAddress: c.address ?? undefined, addressLocality: c.city, addressCountry: c.country } },
+          performer: { '@type': 'MusicGroup', ...artist, name: site.name },
+          organizer: { '@type': 'Organization', name: site.name, url: site.url },
+          ...(c.ticketUrl ? { offers: { '@type': 'Offer', url: c.ticketUrl, availability: c.soldOut ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock' } } : {}),
+        })),
+      },
+    ],
   }
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }} />
 }

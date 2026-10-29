@@ -6,6 +6,7 @@ import '@fontsource/playfair-display/cyrillic-700.css'
 import '../globals.css'
 import { getDict, htmlLang, isLocale, locales } from '@/lib/i18n'
 import { site } from '@/lib/site'
+import { ogImage, ogLocale } from '@/lib/seo'
 import { getDiscography } from '@/lib/music'
 import { latestQueue } from '@/lib/views'
 import Header from '@/components/Header'
@@ -13,7 +14,7 @@ import Footer from '@/components/Footer'
 import { PlayerProvider } from '@/components/Player'
 import NextShowPopup from '@/components/NextShowPopup'
 import { getConcerts } from '@/lib/content'
-import { daysUntil } from '@/components/sections'
+import { ArtistJsonLd, daysUntil } from '@/components/sections'
 import { countryName, dateParts } from '@/lib/i18n'
 import { href } from '@/lib/routes'
 
@@ -29,8 +30,12 @@ export async function generateMetadata({ params }: LayoutProps<'/[lang]'>): Prom
   const t = getDict(lang)
   return {
     metadataBase: new URL(site.url),
+    applicationName: site.name,
     title: { default: t.meta.title, template: `%s – ${site.name}` },
     description: t.meta.description,
+    keywords: ['Azad Bedran', 'Azad Bedran konser', 'Azad Bedran stran', 'Kurdish music', 'Kürtçe müzik', 'muzîka kurdî', 'Amed', 'Diyarbakır'],
+    authors: [{ name: site.name, url: site.url }],
+    creator: site.name,
     alternates: {
       canonical: `/${lang}`,
       languages: { ku: '/ku', tr: '/tr', en: '/en', ru: '/ru', 'x-default': '/ku' },
@@ -40,11 +45,14 @@ export async function generateMetadata({ params }: LayoutProps<'/[lang]'>): Prom
       siteName: site.name,
       title: t.meta.title,
       description: t.meta.description,
-      locale: { ku: 'ku_TR', tr: 'tr_TR', en: 'en_US', ru: 'ru_RU' }[lang],
+      locale: ogLocale[lang],
+      alternateLocale: locales.filter((l) => l !== lang).map((l) => ogLocale[l]),
       url: `/${lang}`,
-      images: [{ url: '/og.jpg', width: 1200, height: 630 }],
+      images: [ogImage(lang)],
     },
-    twitter: { card: 'summary_large_image', site: '@azadbedran' },
+    twitter: { card: 'summary_large_image', site: '@azadbedran', creator: '@azadbedran', title: t.meta.title, description: t.meta.description, images: [ogImage(lang).url] },
+    robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
+    formatDetection: { email: false, address: false },
   }
 }
 
@@ -60,6 +68,7 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[la
       <head>
         <link rel="preconnect" href="https://is1-ssl.mzstatic.com" />
         <link rel="preconnect" href="https://i.ytimg.com" />
+        <ArtistJsonLd upcoming={upcoming} releases={releases} lang={lang} description={t.meta.description} />
       </head>
       <body>
         <a className="skip-link" href="#main">{t.skip}</a>

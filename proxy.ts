@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { GATE_COOKIE, accessToken, gateEnabled } from './lib/gate'
 
-const locales = ['ku', 'tr', 'en'] as const
+const locales = ['ku', 'tr', 'en', 'ru'] as const
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -9,12 +9,11 @@ export async function proxy(request: NextRequest) {
 
   if (gateEnabled() && request.cookies.get(GATE_COOKIE)?.value !== (await accessToken())) {
     const url = request.nextUrl.clone()
-    url.pathname = '/soon'
-    url.searchParams.set('lang', match?.[1] ?? 'ku')
-    return NextResponse.rewrite(url, { headers: { 'X-Robots-Tag': 'noindex' } })
+    url.pathname = `/soon/${match?.[1] ?? 'ku'}`
+    return NextResponse.rewrite(url)
   }
 
-  if (match || pathname === '/soon') return
+  if (match || pathname.startsWith('/soon')) return
   // Erste Sprache ist immer Kurmancî
   request.nextUrl.pathname = `/${locales[0]}${pathname === '/' ? '' : pathname}`
   return NextResponse.redirect(request.nextUrl)

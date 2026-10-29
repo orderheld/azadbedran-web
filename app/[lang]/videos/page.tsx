@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { MoreLink, PageHero, SectionHead, VideoGrid } from '@/components/sections'
 import { getDict, isLocale } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
+import { seo } from '@/lib/seo'
 import { site } from '@/lib/site'
 import { getVideos, liveIds } from '@/lib/videos'
 
@@ -11,7 +12,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/videos'>) 
   const { lang } = await params
   if (!isLocale(lang)) return {}
   const t = getDict(lang)
-  return pageMeta(lang, '/videos', t.nav.videos, t.videos.title)
+  return pageMeta(lang, '/videos', seo[lang].videos.title, seo[lang].videos.description)
 }
 
 export default async function VideosPage({ params }: PageProps<'/[lang]/videos'>) {

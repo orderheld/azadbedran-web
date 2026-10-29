@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import { ArtistJsonLd, ConcertList, ManagerCard, NextShow, PageHero, SectionHead } from '@/components/sections'
-import { getDict, isLocale } from '@/lib/i18n'
+import { ConcertList, ManagerCard, NextShow, PageHero, SectionHead } from '@/components/sections'
+import { formatDate, getDict, isLocale } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
+import { seo } from '@/lib/seo'
 import { getConcerts } from '@/lib/content'
 
 export const revalidate = 3600
@@ -10,8 +11,11 @@ export const revalidate = 3600
 export async function generateMetadata({ params }: PageProps<'/[lang]/concerts'>) {
   const { lang } = await params
   if (!isLocale(lang)) return {}
-  const t = getDict(lang)
-  return pageMeta(lang, '/concerts', t.nav.concerts, t.concerts.upcoming)
+  const { upcoming } = await getConcerts()
+  const s = seo[lang]
+  const list = upcoming.slice(0, 4).map((c) => `${formatDate(c.date, lang)} ${c.city}`).join(' · ')
+  const description = list ? `${s.concerts.description} ${s.upcoming}: ${list}.` : s.concerts.description
+  return pageMeta(lang, '/concerts', s.concerts.title, description, { url: `/og/concerts-${lang}.jpg`, width: 1200, height: 630, alt: s.concerts.title })
 }
 
 export default async function ConcertsPage({ params }: PageProps<'/[lang]/concerts'>) {
@@ -23,7 +27,6 @@ export default async function ConcertsPage({ params }: PageProps<'/[lang]/concer
 
   return (
     <main>
-      <ArtistJsonLd upcoming={upcoming} />
       <PageHero kicker={t.concerts.kicker} title={t.concerts.title} image="/images/azad-live-stage.jpg" position="50% 35%" />
       <section className="section section-tight">
         <div className="container">

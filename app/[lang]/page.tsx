@@ -5,7 +5,7 @@ import Logo from '@/components/Logo'
 import { PlayButton } from '@/components/Player'
 import { ArrowRight } from '@/components/Icons'
 import {
-  ArtistJsonLd, ConcertList, Facts, LatestRelease, ManagerCard, MoreLink, NewsGrid, NextShow, PlatformStrip, ReleaseGrid, Rule, SectionHead, VideoGrid, daysUntil,
+  ConcertList, Facts, LatestRelease, ManagerCard, MoreLink, NewsGrid, NextShow, PlatformStrip, ReleaseGrid, Rule, SectionHead, VideoGrid, daysUntil,
 } from '@/components/sections'
 import { dateParts, getDict, isLocale } from '@/lib/i18n'
 import { href } from '@/lib/routes'
@@ -31,7 +31,6 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
 
   return (
     <main className="home">
-      <ArtistJsonLd upcoming={upcoming} />
 
       <section className="hero">
         <div className="hero-img" aria-hidden>

@@ -36,7 +36,7 @@ export function streamingPlatforms(): Platform[] {
 
 export const manager = {
   name: 'Ozan Kızılkar',
-  photo: '/images/ozan-kizilkar.jpg',
+  photo: '/images/ozan-kizilkar-portrait.jpg',
   phone: '+90 539 545 24 76',
 }
 

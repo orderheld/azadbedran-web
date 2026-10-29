@@ -338,8 +338,8 @@ h3 { font-family: var(--sans); font-weight: 700; color: var(--cream); margin: 0;
 .contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 88px); align-items: center; }
 @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
 .manager { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 28px; align-items: center; padding: 28px; border-radius: 20px; border: 1px solid var(--line-2); background: rgba(15, 10, 7, 0.45); }
-.manager-photo { position: relative; aspect-ratio: 3 / 4; border-radius: 12px; overflow: hidden; }
-.manager-photo img { object-fit: cover; }
+.manager-photo { position: relative; aspect-ratio: 4 / 5; border-radius: 12px; overflow: hidden; }
+.manager-photo img { object-fit: cover; object-position: 50% 20%; }
 .manager h3.display { font-family: var(--display); font-weight: 700; font-size: clamp(1.8rem, 3vw, 2.4rem); }
 .manager-phone { margin: 10px 0 0; font-size: 1.25rem; font-weight: 700; color: var(--cream); font-variant-numeric: tabular-nums; }
 .manager .btn-row { margin-top: 20px; }
@@ -429,7 +429,8 @@ body:has(.mini-player) .site-footer { padding-bottom: 96px; }
 .footer-bottom { align-items: center; margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--muted); font-size: 0.88rem; }
 .footer-bottom p { margin: 0; display: flex; gap: 20px; }
 .footer-bottom a:hover { color: var(--cream); }
-.footer-bottom .credit { gap: 6px; }
+.footer-bottom .credit { display: block; white-space: nowrap; }
+.footer-bottom .credit a { display: inline; min-height: 0; }
 .footer-bottom .credit a { color: var(--amber); }
 @media (max-width: 960px) { .footer-top { grid-template-columns: 1fr; } .footer-logo svg { max-width: 220px; } .footer-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
@@ -487,7 +488,7 @@ html.menu-open .mini-player, html.menu-open .show-pop { display: none; }
   .bio-teaser-img { aspect-ratio: 16 / 10; }
   .bio-teaser-grid { gap: 24px; }
 
-  .home .release-grid, .home .video-grid {
+  .home .release-grid, .home .release-grid.is-compact, .home .video-grid {
     grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 44%; gap: 14px;
     overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
     margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter);

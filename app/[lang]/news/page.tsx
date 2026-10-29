@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { NewsGrid, PageHero } from '@/components/sections'
 import { getDict, isLocale } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
+import { seo } from '@/lib/seo'
 import { getNews } from '@/lib/content'
 
 export const revalidate = 600
@@ -10,7 +11,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/news'>) {
   const { lang } = await params
   if (!isLocale(lang)) return {}
   const t = getDict(lang)
-  return pageMeta(lang, '/news', t.nav.news, t.news.title)
+  return pageMeta(lang, '/news', seo[lang].news.title, seo[lang].news.description)
 }
 
 export default async function NewsPage({ params }: PageProps<'/[lang]/news'>) {

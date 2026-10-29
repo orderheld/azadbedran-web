@@ -4,6 +4,7 @@ import { CoverImage, TrackList } from '@/components/Release'
 import { LatestRelease, PageHero, PlatformStrip, ReleaseGrid, SectionHead } from '@/components/sections'
 import { getDict, isLocale } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
+import { seo } from '@/lib/seo'
 import { getAlbumSongs, getDiscography } from '@/lib/music'
 import { credit, toView, typeLabel } from '@/lib/views'
 
@@ -13,7 +14,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/music'>) {
   const { lang } = await params
   if (!isLocale(lang)) return {}
   const t = getDict(lang)
-  return pageMeta(lang, '/music', t.nav.music, t.music.platformsText)
+  return pageMeta(lang, '/music', seo[lang].music.title, seo[lang].music.description)
 }
 
 export default async function MusicPage({ params }: PageProps<'/[lang]/music'>) {

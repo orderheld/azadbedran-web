@@ -4,6 +4,9 @@ import { notFound } from 'next/navigation'
 import { ArrowUpRight } from '@/components/Icons'
 import { formatDate, getDict, isLocale, locales } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
+import { shareLabels } from '@/lib/seo'
+import { site } from '@/lib/site'
+import ShareButton from '@/components/ShareButton'
 import { href } from '@/lib/routes'
 import { getNews, getNewsItem } from '@/lib/content'
 
@@ -20,7 +23,9 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/news/[id]'
   if (!isLocale(lang)) return {}
   const item = await getNewsItem(Number(id))
   if (!item) return {}
-  return pageMeta(lang, `/news/${id}`, item.title[lang], item.body[lang].slice(0, 160))
+  const text = item.body[lang].replace(/\s+/g, ' ')
+  const description = text.length > 160 ? `${text.slice(0, 157).replace(/\s\S*$/, '')}…` : text
+  return pageMeta(lang, `/news/${id}`, item.title[lang], description, item.image ? { url: item.image, alt: item.title[lang] } : undefined, 'article')
 }
 
 export default async function NewsArticle({ params }: PageProps<'/[lang]/news/[id]'>) {
@@ -42,7 +47,21 @@ export default async function NewsArticle({ params }: PageProps<'/[lang]/news/[i
         <div className="article-body">
           {item.body[lang].split(/\n\n+/).map((p, i) => <p key={i}>{p}</p>)}
         </div>
-        {item.link && <a className="btn btn-primary" href={item.link} target="_blank" rel="noopener">{t.news.read} <ArrowUpRight size={14} /></a>}
+        <div className="btn-row">
+          {item.link && <a className="btn btn-primary" href={item.link} target="_blank" rel="noopener">{t.news.read} <ArrowUpRight size={14} /></a>}
+          <ShareButton url={`/${lang}/news/${id}`} title={item.title[lang]} label={shareLabels[lang].share} copied={shareLabels[lang].copied} />
+        </div>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'NewsArticle',
+          headline: item.title[lang],
+          datePublished: item.date,
+          inLanguage: lang,
+          mainEntityOfPage: `${site.url}/${lang}/news/${id}`,
+          ...(item.image ? { image: [item.image.startsWith('http') ? item.image : `${site.url}${item.image}`] } : {}),
+          author: { '@type': 'MusicGroup', '@id': `${site.url}/#artist`, name: site.name },
+          publisher: { '@type': 'Organization', name: site.name, logo: { '@type': 'ImageObject', url: `${site.url}/icon-512.png` } },
+        }).replace(/</g, '\\u003c') }} />
       </div>
     </main>
   )

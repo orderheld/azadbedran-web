@@ -11,9 +11,9 @@ const copy = {
 type Lang = keyof typeof copy
 const names: Record<Lang, string> = { ku: 'Kurmancî', tr: 'Türkçe', en: 'English', ru: 'Русский' }
 
-export default async function Soon({ searchParams }: { searchParams: Promise<{ lang?: string; error?: string }> }) {
-  const sp = await searchParams
-  const lang: Lang = sp.lang && sp.lang in copy ? (sp.lang as Lang) : 'ku'
+export default async function Soon({ params, searchParams }: { params: Promise<{ lang: string }>; searchParams: Promise<{ error?: string }> }) {
+  const [{ lang: l }, sp] = await Promise.all([params, searchParams])
+  const lang: Lang = l in copy ? (l as Lang) : 'ku'
   const t = copy[lang]
 
   return (
@@ -53,7 +53,7 @@ export default async function Soon({ searchParams }: { searchParams: Promise<{ l
         {sp.error && <p className="soon-error" role="alert">{t.error}</p>}
       </form>
 
-      <p className="soon-credit">Webdesign <a href="https://webnova.ch" target="_blank" rel="noopener">Webnova</a></p>
+      <p className="soon-credit">Webdesign bei <a href="https://webnova.ch" target="_blank" rel="noopener">Webnova</a></p>
     </main>
   )
 }
