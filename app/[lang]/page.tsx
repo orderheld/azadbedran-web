@@ -25,7 +25,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
   const [{ upcoming }, news, releases, { videos }] = await Promise.all([getConcerts(), getNews(3), getDiscography(), getVideos()])
   const latest = releases[0]
   const albums = releases.filter((r) => r.type !== 'single')
-  const singles = releases.filter((r) => r.type === 'single' && r.id !== latest?.id).slice(0, 8)
+  const singles = releases.filter((r) => r.type === 'single' && r.id !== latest?.id).slice(0, 5)
   const next = upcoming[0]
   const queue = latestQueue(releases)
 
@@ -90,7 +90,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
       <section className="section section-dark">
         <div className="container">
           <SectionHead kicker={t.videos.kicker} title={t.videos.title} />
-          <VideoGrid videos={videos.slice(0, 4)} t={t} lang={lang} />
+          <VideoGrid videos={videos.slice(0, 3)} t={t} lang={lang} feature={false} />
           <div className="btn-row">
             <MoreLink to={href(lang, 'videos')} label={t.nav.videos} />
             <MoreLink to={site.youtubeSubscribeUrl} label={t.videos.subscribe} external />
