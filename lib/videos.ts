@@ -1,37 +1,27 @@
 import 'server-only'
+import { curatedVideos, type CuratedVideo } from './curated-videos'
+import { sql } from './db'
 
 export type Video = { id: string; title: string; date: string | null; views: number | null }
 
 const CHANNEL_ID = 'UCGd0Bur3OfTZibdHr_o26Zg' // youtube.com/@Azadbedranoffical („Azad Bedran resmî hesap“)
 
-// Videos vom offiziellen Kanal (geprüft am 29.10.2026: Titel, Kanal und Datum je Video-Seite)
-const curated: (Video & { live?: boolean })[] = [
-  { id: 'VZn3rkqh3fo', title: 'Evîna Azad (Konser)', date: '2026-02-27', views: null, live: true },
-  { id: 'QjVfjl1WZSQ', title: 'Aşk Amedspor', date: '2026-02-19', views: null },
-  { id: 'X3v4Kf8eqrU', title: 'Ka Berxêmin', date: '2025-10-22', views: null },
-  { id: 'cnc8kazmikw', title: 'Bêhna Bihuşt', date: '2025-05-23', views: null },
-  { id: 'RyvXQT1Qawk', title: 'Wayê Wayê (Amed Konser)', date: '2025-04-30', views: null, live: true },
-  { id: 'S7aEHWX9S_s', title: 'Nav Bexça Dil', date: '2025-03-19', views: null },
-  { id: '99FHK_kU_VI', title: 'Eva Dinya Pir Mezine (Konser)', date: '2025-02-24', views: null, live: true },
-  { id: 'T1hJUjF4T8w', title: 'Çavênte Welatêmine', date: '2024-11-19', views: null },
-  { id: 'rnWBZ_zcIU4', title: 'Rêwîyên Şad (Konser)', date: '2024-09-16', views: null, live: true },
-  { id: 'Zi8O9otMccI', title: 'Bi Xêr Hatî', date: '2024-08-10', views: null },
-  { id: '-S1OrYqfP4E', title: 'Behna Te Dikim Dayê (Konser)', date: '2023-11-04', views: null, live: true },
-  { id: 'egq65dfRCE8', title: 'Wayê Wayê', date: '2022-11-24', views: null },
-  { id: 'lPwpPGc5nvU', title: 'Paytexta Evînê (Albûm)', date: '2022-08-22', views: null },
-  { id: '1X9jHJ6obCo', title: 'Dilaname', date: '2022-05-31', views: null },
-  { id: '1zvC29-Y3Dk', title: 'Haydi Amedspor', date: '2022-05-06', views: null },
-  { id: 'S3TXj9NVLrs', title: 'Paytexta Evînê', date: '2022-05-02', views: null },
-  { id: 'HVeayn2-1Go', title: 'Govend & Halay (Zindî)', date: '2022-03-30', views: null, live: true },
-  { id: 'Q3msL9cGb5Q', title: 'Oxir Be', date: '2021-07-16', views: null },
-  { id: 'zLv7-xd8ckQ', title: 'Cejna We Pîroz (Newroza Wanê 2021)', date: '2021-03-24', views: null, live: true },
-  { id: 'YF-NBRgKH1A', title: 'Were Canê (Ji Bo Xalê Seyitxan)', date: '2021-02-28', views: null },
-  { id: 'f8mhHLCT6K4', title: 'Hîve', date: '2020-08-11', views: null },
-  { id: '797KSMidXWw', title: 'Ez Nisêbin Tu Qamişlo', date: '2019-10-17', views: null },
-  { id: '9qnivjfZOgU', title: 'Leyla (bi Svetlana re)', date: '2018-12-20', views: null },
-  { id: 'Ob7TMB3GTyU', title: 'Ki Zava', date: '2017-06-21', views: null },
-]
-export const liveIds = new Set(curated.filter((v) => v.live).map((v) => v.id))
+
+// Videoliste aus dem Admin-Bereich (Tabelle videos), sonst die geprüfte Liste aus lib/curated-videos.ts
+async function getCurated(): Promise<{ list: CuratedVideo[]; hidden: Set<string> }> {
+  if (sql) {
+    try {
+      const rows = await sql`select youtube_id, title, date, live, published from videos order by date desc nulls last, id desc`
+      if (rows.length) {
+        const list = rows.filter((r) => r.published).map((r) => ({ id: r.youtube_id, title: r.title, date: r.date ? (r.date instanceof Date ? r.date.toISOString() : String(r.date)).slice(0, 10) : null, views: null, live: r.live }))
+        return { list, hidden: new Set(rows.filter((r) => !r.published).map((r) => r.youtube_id)) }
+      }
+    } catch (e) {
+      console.error('[videos] database unavailable, using built-in list', e)
+    }
+  }
+  return { list: curatedVideos, hidden: new Set() }
+}
 
 const decode = (s: string) =>
   s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>')
@@ -50,7 +40,9 @@ export const cleanTitle = (t: string) =>
   t.replace(/^azad\s+bedran\s*[-–|:]\s*/i, '').replace(/\s*[-–|]\s*azad\s+bedran$/i, '').replace(/\s*#\S+/g, '').trim()
 
 // Neueste Videos direkt vom offiziellen Kanal (RSS, max. 15), ohne Shorts
-export async function getVideos(): Promise<{ videos: Video[]; live: boolean }> {
+export async function getVideos(): Promise<{ videos: Video[]; live: boolean; liveIds: Set<string> }> {
+  const { list: curated, hidden } = await getCurated()
+  const liveIds = new Set(curated.filter((v) => v.live).map((v) => v.id))
   try {
     const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`, { next: { revalidate: 60 * 60 * 3 }, signal: AbortSignal.timeout(6000) })
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
@@ -62,13 +54,13 @@ export async function getVideos(): Promise<{ videos: Video[]; live: boolean }> {
       views: Number(e.match(/views="(\d+)"/)?.[1] ?? NaN) || null,
     }))
     const shorts = await Promise.all(entries.map((v) => isShort(v.id)))
-    const videos = entries.filter((v, i) => v.id && !shorts[i])
+    const videos = entries.filter((v, i) => v.id && !shorts[i] && !hidden.has(v.id))
     if (!videos.length) throw new Error('empty feed')
     const ids = new Set(videos.map((v) => v.id))
-    return { videos: [...videos, ...curated.filter((v) => !ids.has(v.id))].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '')), live: true }
+    return { videos: [...videos, ...curated.filter((v) => !ids.has(v.id))].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '')), live: true, liveIds }
   } catch (e) {
     console.warn('[videos] channel feed unavailable:', (e as Error).message)
-    return { videos: curated, live: false }
+    return { videos: curated, live: false, liveIds }
   }
 }
 

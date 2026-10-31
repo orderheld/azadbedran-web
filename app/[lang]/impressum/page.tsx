@@ -1,12 +1,13 @@
 import { notFound } from 'next/navigation'
 import { PageHero } from '@/components/sections'
-import { getDict, isLocale } from '@/lib/i18n'
+import { isLocale } from '@/lib/i18n'
 import { imprint } from '@/lib/legal'
+import { loadDict } from '@/lib/content'
 
 export default async function Page({ params }: PageProps<'/[lang]/impressum'>) {
   const { lang } = await params
   if (!isLocale(lang)) notFound()
-  const t = getDict(lang)
+  const t = await loadDict(lang)
   return (
     <main>
       <PageHero kicker="Azad Bedran" title={t.footer.imprint} />
@@ -26,5 +27,5 @@ export default async function Page({ params }: PageProps<'/[lang]/impressum'>) {
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/impressum'>) {
   const { lang } = await params
-  return { title: isLocale(lang) ? getDict(lang).footer.imprint : '', robots: { index: false } }
+  return { title: isLocale(lang) ? (await loadDict(lang)).footer.imprint : '', robots: { index: false } }
 }

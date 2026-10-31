@@ -1,8 +1,9 @@
 import 'server-only'
-import { neon } from '@neondatabase/serverless'
+import { cache } from 'react'
+import { sql } from './db'
 import { seedConcerts, seedNews, type Concert, type NewsItem } from './seed'
-
-const sql = process.env.DATABASE_URL ? neon(process.env.DATABASE_URL) : null
+import { gallery as staticGallery } from './site'
+import { getDict, type Dict, type Locale } from './i18n'
 
 const toIso = (v: unknown) => (v instanceof Date ? v.toISOString().slice(0, 10) : String(v).slice(0, 10))
 
@@ -65,4 +66,61 @@ export async function getNews(limit = 6): Promise<NewsItem[]> {
 export async function getNewsItem(id: number): Promise<NewsItem | null> {
   const all = await getNews(200)
   return all.find((n) => n.id === id) ?? null
+}
+
+export type GalleryItem = { src: string; w: number; h: number; alt?: string | null }
+
+// Galerie aus dem Admin-Bereich, sonst die freigegebenen Fotos aus lib/site.ts
+export async function getGallery(): Promise<GalleryItem[]> {
+  if (sql) {
+    try {
+      const rows = await sql`select src, width, height, alt from gallery where published order by sort, id`
+      const all = await sql`select count(*)::int as n from gallery`
+      if (all[0].n > 0) return rows.map((r) => ({ src: r.src, w: r.width, h: r.height, alt: r.alt }))
+    } catch (e) {
+      console.error('[content] gallery: falling back to static list', e)
+    }
+  }
+  return staticGallery
+}
+
+// ---- Texte: lib/i18n.ts + Änderungen aus dem Admin-Bereich (Tabelle texts) ----
+
+type Tree = Record<string, unknown> | unknown[]
+
+function setPath(node: unknown, keys: string[], value: string): unknown {
+  if (!keys.length) return typeof node === 'string' ? value : node
+  if (node === null || typeof node !== 'object') return node
+  const [k, ...rest] = keys
+  if (!(k in (node as Tree))) return node
+  const copy: Tree = Array.isArray(node) ? [...node] : { ...(node as Record<string, unknown>) }
+  ;(copy as Record<string, unknown>)[k] = setPath((node as Record<string, unknown>)[k], rest, value)
+  return copy
+}
+
+export async function getTextOverrides(lang: Locale): Promise<Record<string, string>> {
+  if (!sql) return {}
+  try {
+    const rows = await sql`select key, value from texts where lang = ${lang}`
+    return Object.fromEntries(rows.map((r) => [r.key, r.value]))
+  } catch (e) {
+    console.error('[content] texts: using built-in texts', e)
+    return {}
+  }
+}
+
+export const loadDict = cache(async (lang: Locale): Promise<Dict> => {
+  let dict: unknown = getDict(lang)
+  for (const [key, value] of Object.entries(await getTextOverrides(lang))) dict = setPath(dict, key.split('.'), value)
+  return dict as Dict
+})
+
+export async function getHiddenReleases(): Promise<Set<number>> {
+  if (!sql) return new Set()
+  try {
+    const rows = await sql`select apple_id from release_overrides where hidden`
+    return new Set(rows.map((r) => Number(r.apple_id)))
+  } catch {
+    return new Set()
+  }
 }

@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { ConcertList, ManagerCard, NextShow, PageHero, SectionHead } from '@/components/sections'
-import { formatDate, getDict, isLocale } from '@/lib/i18n'
+import { formatDate, isLocale } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
 import { seo } from '@/lib/seo'
-import { getConcerts } from '@/lib/content'
+import { getConcerts, loadDict } from '@/lib/content'
 
 export const revalidate = 3600
 
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/concerts'>
 export default async function ConcertsPage({ params }: PageProps<'/[lang]/concerts'>) {
   const { lang } = await params
   if (!isLocale(lang)) notFound()
-  const t = getDict(lang)
+  const t = await loadDict(lang)
   const { upcoming, past } = await getConcerts()
   const posters = [...new Set(upcoming.map((c) => c.poster).filter((p): p is string => !!p))]
 

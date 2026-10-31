@@ -2,25 +2,26 @@ import { notFound } from 'next/navigation'
 import { ChooseButton } from '@/components/Player'
 import { CoverImage, TrackList } from '@/components/Release'
 import { LatestRelease, PageHero, PlatformStrip, ReleaseGrid, SectionHead } from '@/components/sections'
-import { getDict, isLocale } from '@/lib/i18n'
+import { isLocale } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
 import { seo } from '@/lib/seo'
 import { getAlbumSongs, getDiscography } from '@/lib/music'
 import { credit, toView, typeLabel } from '@/lib/views'
+import { loadDict } from '@/lib/content'
 
 export const revalidate = 21600
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/music'>) {
   const { lang } = await params
   if (!isLocale(lang)) return {}
-  const t = getDict(lang)
+  const t = await loadDict(lang)
   return pageMeta(lang, '/music', seo[lang].music.title, seo[lang].music.description)
 }
 
 export default async function MusicPage({ params }: PageProps<'/[lang]/music'>) {
   const { lang } = await params
   if (!isLocale(lang)) notFound()
-  const t = getDict(lang)
+  const t = await loadDict(lang)
   const releases = await getDiscography()
   const albums = releases.filter((r) => r.type !== 'single')
   const singles = releases.filter((r) => r.type === 'single')

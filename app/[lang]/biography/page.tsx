@@ -1,21 +1,22 @@
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { Facts, PageHero, Rule } from '@/components/sections'
-import { bioSources, getDict, isLocale } from '@/lib/i18n'
+import { bioSources, isLocale } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
 import { images } from '@/lib/site'
+import { loadDict } from '@/lib/content'
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/biography'>) {
   const { lang } = await params
   if (!isLocale(lang)) return {}
-  const t = getDict(lang)
+  const t = await loadDict(lang)
   return pageMeta(lang, '/biography', t.nav.bio, t.bio.lead)
 }
 
 export default async function BioPage({ params }: PageProps<'/[lang]/biography'>) {
   const { lang } = await params
   if (!isLocale(lang)) notFound()
-  const t = getDict(lang)
+  const t = await loadDict(lang)
   return (
     <main>
       <PageHero kicker={t.bio.kicker} title={t.bio.title} lead={t.bio.lead} image={images.hero.src} position="60% 30%" />

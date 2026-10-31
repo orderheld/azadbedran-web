@@ -1,20 +1,21 @@
 import { notFound } from 'next/navigation'
 import { ManagerCard, PageHero, SocialList } from '@/components/sections'
-import { getDict, isLocale } from '@/lib/i18n'
+import { isLocale } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
 import { seo } from '@/lib/seo'
+import { loadDict } from '@/lib/content'
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/contact'>) {
   const { lang } = await params
   if (!isLocale(lang)) return {}
-  const t = getDict(lang)
+  const t = await loadDict(lang)
   return pageMeta(lang, '/contact', seo[lang].contact.title, seo[lang].contact.description)
 }
 
 export default async function ContactPage({ params }: PageProps<'/[lang]/contact'>) {
   const { lang } = await params
   if (!isLocale(lang)) notFound()
-  const t = getDict(lang)
+  const t = await loadDict(lang)
   return (
     <main>
       <PageHero kicker={t.contact.kicker} title={t.contact.title} lead={t.contact.text} image="/images/azad-warm.jpg" position="50% 30%" />

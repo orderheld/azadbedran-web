@@ -3,12 +3,13 @@ import '@fontsource-variable/bodoni-moda/opsz.css'
 import '@fontsource-variable/manrope'
 import '@fontsource/playfair-display/cyrillic-700.css'
 import './soon.css'
-import { getDict, htmlLang, isLocale, locales, type Locale } from '@/lib/i18n'
+import { htmlLang, isLocale, locales, type Locale } from '@/lib/i18n'
 import { site } from '@/lib/site'
 import { ogImage, ogLocale } from '@/lib/seo'
 import { getDiscography } from '@/lib/music'
-import { getConcerts } from '@/lib/content'
+import { getConcerts, loadDict } from '@/lib/content'
 import { ArtistJsonLd } from '@/components/sections'
+import Analytics from '@/components/Analytics'
 
 export const generateStaticParams = () => locales.map((lang) => ({ lang }))
 export const dynamicParams = false
@@ -17,7 +18,7 @@ export const dynamicParams = false
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang: l } = await params
   const lang: Locale = isLocale(l) ? l : 'ku'
-  const t = getDict(lang)
+  const t = await loadDict(lang)
   return {
     metadataBase: new URL(site.url),
     applicationName: site.name,
@@ -38,6 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
       images: [ogImage(lang)],
     },
     twitter: { card: 'summary_large_image', site: '@azadbedran', title: t.meta.title, description: t.meta.description, images: [ogImage(lang).url] },
+    ...(process.env.GOOGLE_SITE_VERIFICATION ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } } : {}),
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large' } },
   }
 }
@@ -50,9 +52,9 @@ export default async function SoonLayout({ children, params }: { children: React
   return (
     <html lang={htmlLang[lang]}>
       <head>
-        <ArtistJsonLd upcoming={upcoming} releases={releases} lang={lang} description={getDict(lang).meta.description} />
+        <ArtistJsonLd upcoming={upcoming} releases={releases} lang={lang} description={(await loadDict(lang)).meta.description} />
       </head>
-      <body>{children}</body>
+      <body>{children}<Analytics /></body>
     </html>
   )
 }
