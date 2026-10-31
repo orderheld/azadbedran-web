@@ -7,10 +7,10 @@ import { ArrowRight } from '@/components/Icons'
 import {
   ConcertList, Facts, LatestRelease, ManagerCard, MoreLink, NewsGrid, NextShow, PlatformStrip, ReleaseGrid, Rule, SectionHead, VideoGrid, daysUntil,
 } from '@/components/sections'
-import { dateParts, getDict, isLocale } from '@/lib/i18n'
+import { dateParts, isLocale } from '@/lib/i18n'
 import { href } from '@/lib/routes'
 import { images, site } from '@/lib/site'
-import { getConcerts, getNews } from '@/lib/content'
+import { getConcerts, getNews, loadDict } from '@/lib/content'
 import { getDiscography } from '@/lib/music'
 import { getVideos } from '@/lib/videos'
 import { latestQueue, toView } from '@/lib/views'
@@ -20,7 +20,7 @@ export const revalidate = 21600
 export default async function Home({ params }: PageProps<'/[lang]'>) {
   const { lang } = await params
   if (!isLocale(lang)) notFound()
-  const t = getDict(lang)
+  const t = await loadDict(lang)
 
   const [{ upcoming }, news, releases, { videos }] = await Promise.all([getConcerts(), getNews(3), getDiscography(), getVideos()])
   const latest = releases[0]

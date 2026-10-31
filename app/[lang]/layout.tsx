@@ -4,7 +4,7 @@ import '@fontsource-variable/bodoni-moda/opsz.css'
 import '@fontsource-variable/manrope'
 import '@fontsource/playfair-display/cyrillic-700.css'
 import '../globals.css'
-import { getDict, htmlLang, isLocale, locales } from '@/lib/i18n'
+import { htmlLang, isLocale, locales } from '@/lib/i18n'
 import { site } from '@/lib/site'
 import { ogImage, ogLocale } from '@/lib/seo'
 import { getDiscography } from '@/lib/music'
@@ -13,7 +13,8 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { PlayerProvider } from '@/components/Player'
 import NextShowPopup from '@/components/NextShowPopup'
-import { getConcerts } from '@/lib/content'
+import Analytics from '@/components/Analytics'
+import { getConcerts, loadDict } from '@/lib/content'
 import { ArtistJsonLd, daysUntil } from '@/components/sections'
 import { countryName, dateParts } from '@/lib/i18n'
 import { href } from '@/lib/routes'
@@ -27,7 +28,7 @@ export const viewport: Viewport = { themeColor: '#0f0a07', colorScheme: 'dark' }
 export async function generateMetadata({ params }: LayoutProps<'/[lang]'>): Promise<Metadata> {
   const { lang } = await params
   if (!isLocale(lang)) return {}
-  const t = getDict(lang)
+  const t = await loadDict(lang)
   return {
     metadataBase: new URL(site.url),
     applicationName: site.name,
@@ -53,13 +54,14 @@ export async function generateMetadata({ params }: LayoutProps<'/[lang]'>): Prom
     twitter: { card: 'summary_large_image', site: '@azadbedran', creator: '@azadbedran', title: t.meta.title, description: t.meta.description, images: [ogImage(lang).url] },
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
     formatDetection: { email: false, address: false },
+    ...(process.env.GOOGLE_SITE_VERIFICATION ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } } : {}),
   }
 }
 
 export default async function RootLayout({ children, params }: LayoutProps<'/[lang]'>) {
   const { lang } = await params
   if (!isLocale(lang)) notFound()
-  const t = getDict(lang)
+  const t = await loadDict(lang)
   const [releases, { upcoming }] = await Promise.all([getDiscography(), getConcerts()])
   const next = upcoming[0]
   const d = next && dateParts(next.date, lang)
@@ -88,6 +90,7 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[la
             />
           )}
         </PlayerProvider>
+        <Analytics />
       </body>
     </html>
   )

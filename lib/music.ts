@@ -1,6 +1,7 @@
 import 'server-only'
 import { catalog } from './catalog'
 import { site } from './site'
+import { getHiddenReleases } from './content'
 
 export type Track = { title: string; preview: string | null; ms: number | null; n: number }
 export type Release = {
@@ -70,11 +71,12 @@ function fromItunes(c: ItunesCollection): Release {
 
 // Diskografie: Apple Music live (neue Veröffentlichungen erscheinen automatisch), sonst Stand aus lib/catalog.ts.
 // Hörproben (30 s) kommen von Apple, Deezer-Links werden über den Titel zugeordnet.
-export async function getDiscography(): Promise<Release[]> {
-  const [albums, songs, deezer] = await Promise.all([
+export async function getDiscography({ includeHidden = false } = {}): Promise<Release[]> {
+  const [albums, songs, deezer, hidden] = await Promise.all([
     getJson<{ results: ItunesCollection[] }>(`https://itunes.apple.com/lookup?id=${site.appleArtistId}&entity=album&limit=200`),
     getJson<{ results: ItunesTrack[] }>(`https://itunes.apple.com/lookup?id=${site.appleArtistId}&entity=song&limit=200`),
     getJson<{ data: DeezerAlbum[] }>(`https://api.deezer.com/artist/${site.deezerArtistId}/albums?limit=200`),
+    getHiddenReleases(),
   ])
 
   const byId = new Map(fromCatalog().map((r) => [r.id, r]))
@@ -100,7 +102,7 @@ export async function getDiscography(): Promise<Release[]> {
     if (!first.has(key)) first.set(key, r)
     else if (!first.get(key)!.songs.length && r.songs.length) first.get(key)!.songs = r.songs
   }
-  return [...first.values()].sort((a, b) => b.date.localeCompare(a.date))
+  return [...first.values()].filter((r) => includeHidden || !hidden.has(r.id)).sort((a, b) => b.date.localeCompare(a.date))
 }
 
 // Songs eines Albums inkl. Hörproben (eigene Abfrage, da die Künstlerabfrage bei 200 Songs endet)

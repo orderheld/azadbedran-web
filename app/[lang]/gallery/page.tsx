@@ -1,22 +1,22 @@
 import { notFound } from 'next/navigation'
 import Gallery from '@/components/Gallery'
 import { PageHero } from '@/components/sections'
-import { getDict, isLocale } from '@/lib/i18n'
+import { isLocale } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
 import { seo } from '@/lib/seo'
-import { gallery } from '@/lib/site'
+import { getGallery, loadDict } from '@/lib/content'
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/gallery'>) {
   const { lang } = await params
   if (!isLocale(lang)) return {}
-  const t = getDict(lang)
+  const t = await loadDict(lang)
   return pageMeta(lang, '/gallery', seo[lang].gallery.title, seo[lang].gallery.description)
 }
 
 export default async function GalleryPage({ params }: PageProps<'/[lang]/gallery'>) {
   const { lang } = await params
   if (!isLocale(lang)) notFound()
-  const t = getDict(lang)
+  const [t, gallery] = await Promise.all([loadDict(lang), getGallery()])
   return (
     <main>
       <PageHero kicker={t.gallery.kicker} title={t.gallery.title} />

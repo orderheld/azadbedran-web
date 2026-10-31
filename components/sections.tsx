@@ -284,6 +284,7 @@ export function ArtistJsonLd({ upcoming, releases, lang, description }: { upcomi
         event: upcoming.map((c) => ({
           '@type': 'MusicEvent',
           name: `Azad Bedran – ${c.city}`,
+          description: `Azad Bedran live${c.venue ? ` – ${c.venue}` : ''}, ${c.city}`,
           url: `${site.url}/${lang}/concerts`,
           startDate: c.time ? `${c.date}T${c.time}:00${tz[c.country] ?? ''}` : c.date,
           eventStatus: 'https://schema.org/EventScheduled',

@@ -2,13 +2,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowUpRight } from '@/components/Icons'
-import { formatDate, getDict, isLocale, locales } from '@/lib/i18n'
+import { formatDate, isLocale, locales } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
 import { shareLabels } from '@/lib/seo'
 import { site } from '@/lib/site'
 import ShareButton from '@/components/ShareButton'
 import { href } from '@/lib/routes'
-import { getNews, getNewsItem } from '@/lib/content'
+import { getNews, getNewsItem, loadDict } from '@/lib/content'
 
 export const revalidate = 300
 export const dynamicParams = true
@@ -33,7 +33,7 @@ export default async function NewsArticle({ params }: PageProps<'/[lang]/news/[i
   if (!isLocale(lang)) notFound()
   const item = await getNewsItem(Number(id))
   if (!item) notFound()
-  const t = getDict(lang)
+  const t = await loadDict(lang)
 
   return (
     <main className="article">

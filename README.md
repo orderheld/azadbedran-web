@@ -13,15 +13,31 @@ npm run dev                  # http://localhost:3000
 Ohne `DATABASE_URL` läuft die Seite mit den Startdaten aus `lib/seed.ts`.
 Mit `SHOW_DEMO_CONTENT=1` erscheinen Beispiel-Konzerte (markiert mit DEMO/MÎNAK/ÖRNEK), nur für Vorschauen.
 
+## Admin-Bereich
+
+Unter **`/admin`** (z. B. https://azadbedran.com/admin) gibt es ein Dashboard im Stil von WordPress:
+
+- **Dashboard**: Live-Besucher, Kennzahlen der letzten 7 Tage, nächste Konzerte, neueste News, Systemstatus
+- **Statistik**: Live, Besucher (Seiten, Einstiegsseiten, Herkunft, UTM-Kampagnen, Länder, Städte, Geräte, Browser/Apps, Betriebssysteme, Sprache, Verweildauer, Absprungrate) und Link-Klicks (Anzahl, Seite, Herkunft, Land, Gerät)
+- **Inhalte**: Konzerte, News (4 Sprachen), Musik (Apple-Veröffentlichungen ausblenden), Videos, Galerie (Upload, Reihenfolge, Bildtext), Texte & Bio (alle Texte aus `lib/i18n.ts` überschreibbar), Medien
+- **Einstellungen & SEO**: Status der Konfiguration, Links zu Sitemap, Search Console, PageSpeed, Statistik zurücksetzen
+
+Einrichtung: in Vercel `ADMIN_PASSWORD` (mind. 8 Zeichen) setzen, Neon verbinden, neu deployen, dann unter `/admin` auf „Datenbank einrichten“ klicken (alternativ `npm run db:setup`; beides kann gefahrlos wiederholt werden).
+
+Die Statistik ist selbst gebaut (`components/Analytics.tsx`, `app/api/t`): keine Cookies, keine gespeicherten IP-Adressen, Besucher werden über einen täglich wechselnden Hash gezählt. Land/Stadt kommen aus den Vercel-Geo-Headern. Eigene Besuche mit Admin-Anmeldung werden nicht gezählt, Bots werden ausgefiltert.
+
+Lokal testen mit normalem Postgres: `DATABASE_URL=postgres://postgres@localhost:5432/azad` (wird automatisch erkannt).
+
 ## Wo was gepflegt wird
 
 | Was | Wo |
 | --- | --- |
-| Konzerte (kommende + vergangene) | Neon, Tabelle `concerts` |
-| News (3 Sprachen) | Neon, Tabelle `news` |
+| Konzerte (kommende + vergangene) | Admin → Konzerte (Neon, Tabelle `concerts`) |
+| News (4 Sprachen) | Admin → News (Tabelle `news`) |
 | Alben/Singles inkl. Original-Cover | automatisch von Deezer, sonst Apple Music/iTunes (alle 6 h), Fallback `lib/seed.ts` |
-| Texte, Bio, Menü (3 Sprachen) | `lib/i18n.ts` |
-| Social-Links, Plattformen, Manager, Videos, Galerie | `lib/site.ts` |
+| Texte, Bio, Menü (4 Sprachen) | `lib/i18n.ts`, Änderungen über Admin → Texte & Bio (Tabelle `texts`) |
+| Videos, Galerie | Admin → Videos / Galerie (Tabellen `videos`, `gallery`; ohne Datenbank `lib/curated-videos.ts`, `lib/site.ts`) |
+| Social-Links, Plattformen, Manager | `lib/site.ts` |
 | Fotos | `public/images/`, `public/gallery/` |
 
 Neuer Konzerttermin in Neon (SQL-Editor):
@@ -46,4 +62,4 @@ Der nächste Termin erscheint automatisch oben im Hero und hervorgehoben in der 
 
 ## Datenschutz
 
-Keine externen Schriften (selbst gehostet), keine Cookies. YouTube-, Deezer- und Spotify-Player werden erst nach Klick geladen (Zwei-Klick-Lösung).
+Keine externen Schriften (selbst gehostet), keine Tracking-Cookies, eigene anonyme Statistik ohne IP-Speicherung. YouTube-, Deezer- und Spotify-Player werden erst nach Klick geladen (Zwei-Klick-Lösung).
