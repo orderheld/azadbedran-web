@@ -34,8 +34,8 @@ export const seedConcerts: Concert[] = [
   { id: 13, date: '2026-11-28', time: null, city: 'Reims', venue: null, address: null, country: 'FR', ticketUrl: null, phone: null, poster: tour, soldOut: false },
   { id: 14, date: '2026-11-29', time: null, city: 'Kiel', venue: null, address: null, country: 'DE', ticketUrl: null, phone: null, poster: tour, soldOut: false },
 
-  // Quelle: Ferhat (Projektchat, 01.11.2026) – Konzert zur Unterstützung von Ahmetspor; genauer Veranstaltungsort nicht angegeben
-  { id: 15, date: '2026-10-31', time: null, city: 'Hildesheim', venue: 'Ahmetspor', address: null, country: 'DE', ticketUrl: null, phone: null, poster: null, soldOut: false },
+  // Quelle: Ferhat (Projektchat, 01.11.2026) – Konzert zur Unterstützung von Amedspor; genauer Veranstaltungsort nicht angegeben
+  { id: 15, date: '2026-10-31', time: null, city: 'Hildesheim', venue: 'Amedspor', address: null, country: 'DE', ticketUrl: null, phone: null, poster: null, soldOut: false },
   { id: 1, date: '2026-01-10', time: '21:30', city: 'Amed / Diyarbakır', venue: 'Sezai Karakoç Kültür ve Kongre Merkezi', address: null, country: 'TR', ticketUrl: null, phone: null, poster: null, soldOut: false },
   { id: 8, date: '2025-12-14', time: '20:00', city: 'Köln', venue: 'Sartory Säle', address: 'Friesenstraße 44–48', country: 'DE', ticketUrl: null, phone: null, poster: null, soldOut: false },
   { id: 2, date: '2025-12-06', time: '21:30', city: 'İstanbul', venue: 'Trump Sahne', address: null, country: 'TR', ticketUrl: null, phone: null, poster: null, soldOut: false },
@@ -53,18 +53,18 @@ const cover = (path: string) => `https://is1-ssl.mzstatic.com/image/thumb/${path
 // Nur belegte Ereignisse: Veröffentlichungsdaten laut Apple Music, Konzerte laut Plakat.
 export const seedNews: NewsItem[] = [
   {
-    // Quelle: Ferhat (Projektchat, 01.11.2026)
+    // Quelle: Ferhat (Projektchat, 01.11.2026); Links: offizielle Amedspor-Website amedspor.com.tr
     id: 6,
     date: '2026-10-31',
-    title: { ku: 'Azad Bedran li Hildesheimê ji bo Ahmetsporê derket ser sahneyê', tr: 'Azad Bedran, Hildesheim’da Ahmetspor için sahnedeydi', en: 'Azad Bedran on stage in Hildesheim for Ahmetspor', ru: 'Азад Бедран выступил в Хильдесхайме в поддержку «Ахметспора»' },
+    title: { ku: 'Azad Bedran li Hildesheimê ji bo Amedsporê derket ser sahneyê', tr: 'Azad Bedran, Hildesheim’da Amedspor için sahnedeydi', en: 'Azad Bedran on stage in Hildesheim for Amedspor', ru: 'Азад Бедран выступил в Хильдесхайме в поддержку «Амедспора»' },
     body: {
-      ku: 'Azad Bedran di 31ê Cotmeha 2026an de li Hildesheimê, li nêzî Hannoverê, di konsera piştgiriyê ya ji bo tîma kurd Ahmetspor de derket ser sahneyê û bi stranên xwe piştgiriya xwe nîşanî tîmê da.\n\nAzad Bedran, ku berê bi “Aşk Amedspor” û “Amedspor Geliyor” stran ji Amedsporê re diyarî kiribûn, bi dil û can li pişt Ahmetsporê ye. Ahmetsporê nas bikin, tîmê bişopînin û piştgiriya xwe bidin – ew hêjayî piştgiriya me hemûyan e!',
-      tr: 'Azad Bedran, 31 Ekim 2026’da Hannover yakınlarındaki Hildesheim’da Kürt takımı Ahmetspor’a destek için düzenlenen konserde sahne aldı ve şarkılarıyla takıma desteğini gösterdi.\n\n“Aşk Amedspor” ve “Amedspor Geliyor” ile Amedspor’a da şarkılar armağan eden Azad Bedran, tüm kalbiyle Ahmetspor’un yanında. Ahmetspor’u tanıyın, takımı takip edin ve desteğinizi esirgemeyin – bu takım hepimizin desteğini hak ediyor!',
-      en: 'On 31 October 2026, Azad Bedran performed in Hildesheim, near Hanover, at a concert held in support of the Kurdish team Ahmetspor, standing behind the team with his songs.\n\nAzad, who has already dedicated “Aşk Amedspor” and “Amedspor Geliyor” to Amedspor, backs Ahmetspor with all his heart. Get to know Ahmetspor, follow the team and show your support – they deserve all of ours!',
-      ru: '31 октября 2026 года Азад Бедран выступил в Хильдесхайме под Ганновером на концерте в поддержку курдской команды «Ахметспор» и своими песнями поддержал команду.\n\nАзад, уже посвятивший «Амедспору» песни «Aşk Amedspor» и «Amedspor Geliyor», всем сердцем поддерживает «Ахметспор». Познакомьтесь с командой, следите за ней и поддержите её – она этого заслуживает!',
+      ku: 'Azad Bedran di 31ê Cotmeha 2026an de li Hildesheimê, li nêzî Hannoverê, di konsera piştgiriyê ya ji bo Amedsporê de derket ser sahneyê û bi stranên xwe dilê xwe da tîma Amedê.\n\nPiştgiriya Azad ji Amedsporê re ne nû ye: wî berê bi “Aşk Amedspor” û “Amedspor Geliyor” stran ji tîmê re diyarî kirin. Amedsporê bişopînin û piştgiriya xwe bidin – li ser malpera fermî amedspor.com.tr û li Instagramê @amedskofficial.',
+      tr: 'Azad Bedran, 31 Ekim 2026’da Hannover yakınlarındaki Hildesheim’da Amedspor’a destek için düzenlenen konserde sahne aldı ve şarkılarıyla Amed takımına desteğini gösterdi.\n\nAzad’ın Amedspor sevgisi yeni değil: “Aşk Amedspor” ve “Amedspor Geliyor” ile takıma şarkılar armağan etti. Amedspor’u takip edin, desteğinizi esirgemeyin – resmi site amedspor.com.tr ve Instagram’da @amedskofficial.',
+      en: 'On 31 October 2026, Azad Bedran performed in Hildesheim, near Hanover, at a concert held in support of Amedspor, showing his backing for the Amed club with his songs.\n\nAzad’s love for Amedspor goes back a long way: he has already dedicated “Aşk Amedspor” and “Amedspor Geliyor” to the club. Follow Amedspor and show your support – on the official website amedspor.com.tr and on Instagram at @amedskofficial.',
+      ru: '31 октября 2026 года Азад Бедран выступил в Хильдесхайме под Ганновером на концерте в поддержку клуба «Амедспор» и своими песнями поддержал команду из Амеда.\n\nЛюбовь Азада к «Амедспору» давняя: он уже посвятил клубу песни «Aşk Amedspor» и «Amedspor Geliyor». Следите за «Амедспором» и поддерживайте его – на официальном сайте amedspor.com.tr и в Instagram @amedskofficial.',
     },
     image: '/images/azad-live-stage.jpg',
-    link: null,
+    link: 'https://www.amedspor.com.tr',
   },
   {
     id: 5,
