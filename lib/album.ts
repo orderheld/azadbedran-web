@@ -2,7 +2,7 @@
 // Quellen: offizieller YouTube-Kanal @Azadbedranoffical (Videobeschreibungen, abgerufen 02.11.2026),
 // Instagram-Story von @azadbedran zu „Kes pê Nizane“ (von Ferhat, 02.11.2026).
 // Nur „Kes pê Nizane“ ist auf YouTube ausdrücklich als „Strana 4. ya albûma Vegerîn“ beschriftet;
-// die Lieder 1–3 sind die drei Videos, die im Wochentakt davor erschienen sind (Bestätigung durch Ferhat).
+// die Lieder 1–3 sind die drei Videos, die im Wochentakt davor erschienen sind (von Ferhat bestätigt am 02.11.2026).
 
 import type { Locale } from './i18n'
 
