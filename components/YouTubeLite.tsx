@@ -4,7 +4,7 @@ import { usePlayer } from './Player'
 import { Play } from './Icons'
 
 // Vorschaubild von YouTube (hqdefault gibt es für jedes Video), Player lädt erst nach Klick (youtube-nocookie)
-export default function YouTubeLite({ id, title, playLabel, eager }: { id: string; title: string; playLabel: string; eager?: boolean }) {
+export default function YouTubeLite({ id, title, playLabel, eager, poster }: { id: string; title: string; playLabel: string; eager?: boolean; poster?: string }) {
   const [active, setActive] = useState(false)
   const player = usePlayer()
   return (
@@ -19,7 +19,7 @@ export default function YouTubeLite({ id, title, playLabel, eager }: { id: strin
       ) : (
         <button type="button" onClick={() => { player.pause(); setActive(true) }} aria-label={`${playLabel}: ${title}`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading={eager ? 'eager' : 'lazy'} decoding="async" width={480} height={360} />
+          <img src={poster ?? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading={eager ? 'eager' : 'lazy'} decoding="async" width={poster ? 1280 : 480} height={poster ? 720 : 360} />
           <span className="yt-play"><Play size={26} /></span>
         </button>
       )}

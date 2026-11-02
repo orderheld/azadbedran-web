@@ -5,7 +5,7 @@ import Logo from '@/components/Logo'
 import { PlayButton } from '@/components/Player'
 import { ArrowRight } from '@/components/Icons'
 import {
-  ConcertList, Facts, LatestRelease, ManagerCard, MoreLink, NewsGrid, NextShow, PlatformStrip, ReleaseGrid, Rule, SectionHead, VideoGrid, daysUntil,
+  AlbumSpotlight, ConcertList, Facts, LatestRelease, ManagerCard, MoreLink, NewsGrid, NextShow, PlatformStrip, ReleaseGrid, Rule, SectionHead, VideoGrid, daysUntil,
 } from '@/components/sections'
 import { dateParts, isLocale } from '@/lib/i18n'
 import { href } from '@/lib/routes'
@@ -57,8 +57,14 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
 
       <PlatformStrip t={t} />
 
+      <section className="section">
+        <div className="container">
+          <AlbumSpotlight t={t} lang={lang} />
+        </div>
+      </section>
+
       {latest && (
-        <section className="section">
+        <section className="section section-tight">
           <div className="container">
             <LatestRelease r={toView(latest, t)} t={t} />
           </div>

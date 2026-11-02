@@ -24,6 +24,8 @@ export type NewsItem = {
   link: string | null
 }
 
+import { vegerin } from './album'
+
 const tour = '/images/poster-kasim-2026.jpg'
 
 // Quellen: Tourplakat „Kasım Konserleri“ und Veranstalterplakat St. Petersburg (von Ferhat, 29.10.2026),
@@ -52,6 +54,21 @@ const cover = (path: string) => `https://is1-ssl.mzstatic.com/image/thumb/${path
 
 // Nur belegte Ereignisse: Veröffentlichungsdaten laut Apple Music, Konzerte laut Plakat.
 export const seedNews: NewsItem[] = [
+  {
+    // Quellen: YouTube-Video „Kes Pê Nizane“ (offizieller Kanal, 02.11.2026, Beschreibung „Strana 4. ya albûma Vegerîn“)
+    // und Instagram-Story von @azadbedran (Texte auf Kurmancî und Türkisch von Azad selbst, übernommen)
+    id: 7,
+    date: '2026-11-02',
+    title: { ku: 'Albûma nû “Vegerîn”: strana 4. “Kes pê Nizane” derket', tr: 'Yeni albüm “Vegerîn”: 4. şarkı “Kes pê Nizane” yayında', en: 'New album “Vegerîn”: track 4, “Kes pê Nizane”, is out', ru: 'Новый альбом «Vegerîn»: вышла 4-я песня «Kes pê Nizane»' },
+    body: {
+      ku: `Strana çaremîn a albûma nû ya Azad Bedran “Vegerîn” – “Kes pê Nizane” – di 2yê Mijdara 2026an de li YouTubeê derket. Gotin û muzîka stranê ya mamosteyê hunerî û hevalê hêja Rezan Koç e, aranje ya Serkan Tanık e.\n\nAzad dibêje: “Em bi mamoste Rezan re gelek stran çêkirine. Hestê xwe yê xweş û ji xwe, vê carê jî bi ‘Vegerîn’ re dan albûmê me. Spas û rêz ji mamoste Rezan Koç re.”\n\nStranên albûmê yên ku heta niha derketine: ${vegerin.tracks.map((t) => `${t.n}. “${t.title}”`).join(', ')}. Hemû bi lînkên YouTubeê li ser rûpela muzîkê ne.`,
+      tr: `Azad Bedran’ın yeni albümü “Vegerîn”in 4. şarkısı “Kes pê Nizane” 2 Kasım 2026’da YouTube’da yayımlandı. Şarkının söz ve müziği değerli sanatçı Rezan Koç’a, aranjesi Serkan Tanık’a ait.\n\nAzad Bedran: “Rezan Hocamızla bugüne kadar birçok eser ürettik. Kendi özü, duyarlılığı ve güçlü müzikal diliyle bu kez de ‘Vegerîn’ albümümüze önemli bir katkı sundu. Kendisine gönülden teşekkür ediyorum.”\n\nAlbümden şimdiye kadar yayımlanan şarkılar: ${vegerin.tracks.map((t) => `${t.n}. “${t.title}”`).join(', ')}. Hepsi YouTube linkleriyle müzik sayfasında.`,
+      en: `“Kes pê Nizane”, the fourth song from Azad Bedran’s new album “Vegerîn”, was released on YouTube on 2 November 2026. Lyrics and music are by Rezan Koç, arrangement by Serkan Tanık.\n\nAzad Bedran: “We have made many songs together with Rezan Koç. With his own essence, sensitivity and strong musical language, he has once again made an important contribution to our album ‘Vegerîn’. I thank him from the bottom of my heart.”\n\nSongs from the album released so far: ${vegerin.tracks.map((t) => `${t.n}. “${t.title}”`).join(', ')}. You will find them all with YouTube links on the music page.`,
+      ru: `«Kes pê Nizane», четвёртая песня нового альбома Азада Бедрана «Vegerîn», вышла на YouTube 2 ноября 2026 года. Слова и музыка – Резан Коч, аранжировка – Серкан Танык.\n\nАзад Бедран: «С Резаном Кочем мы создали уже много песен. Своей самобытностью, чуткостью и сильным музыкальным языком он и на этот раз внёс важный вклад в наш альбом „Vegerîn“. Сердечно благодарю его».\n\nПесни альбома, которые уже вышли: ${vegerin.tracks.map((t) => `${t.n}. «${t.title}»`).join(', ')}. Все они со ссылками на YouTube – на странице «Музыка».`,
+    },
+    image: vegerin.image,
+    link: 'https://www.youtube.com/watch?v=RAB_GAXsMwQ',
+  },
   {
     // Quelle: Ferhat (Projektchat, 01.11.2026); Links: offizielle Amedspor-Website amedspor.com.tr
     id: 6,

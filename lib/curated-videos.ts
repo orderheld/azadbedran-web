@@ -1,7 +1,11 @@
 export type CuratedVideo = { id: string; title: string; date: string | null; views: number | null; live?: boolean }
 
-// Videos vom offiziellen Kanal (geprüft am 29.10.2026: Titel, Kanal und Datum je Video-Seite)
+// Videos vom offiziellen Kanal (geprüft am 29.10.2026 bzw. 02.11.2026: Titel, Kanal und Datum je Video)
 export const curatedVideos: CuratedVideo[] = [
+  { id: 'RAB_GAXsMwQ', title: 'Kes pê Nizane', date: '2026-11-02', views: null },
+  { id: 'acAZYC43d3g', title: 'Tu Gulaminî', date: '2026-10-23', views: null },
+  { id: '3kyIIcoxAKE', title: 'Ax Welat', date: '2026-10-16', views: null },
+  { id: 'oB18IGVYEvM', title: 'Şam Şekire', date: '2026-10-08', views: null },
   { id: 'VZn3rkqh3fo', title: 'Evîna Azad (Konser)', date: '2026-02-27', views: null, live: true },
   { id: 'QjVfjl1WZSQ', title: 'Aşk Amedspor', date: '2026-02-19', views: null },
   { id: 'X3v4Kf8eqrU', title: 'Ka Berxêmin', date: '2025-10-22', views: null },
