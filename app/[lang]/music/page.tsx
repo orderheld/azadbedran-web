@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { ChooseButton } from '@/components/Player'
 import { CoverImage, TrackList } from '@/components/Release'
-import { LatestRelease, PageHero, PlatformStrip, ReleaseGrid, SectionHead } from '@/components/sections'
+import { AlbumSpotlight, LatestRelease, PageHero, PlatformStrip, ReleaseGrid, SectionHead } from '@/components/sections'
 import { isLocale } from '@/lib/i18n'
 import { pageMeta } from '@/lib/meta'
 import { seo } from '@/lib/seo'
@@ -31,6 +31,9 @@ export default async function MusicPage({ params }: PageProps<'/[lang]/music'>) 
   return (
     <main>
       <PageHero kicker={t.music.kicker} title={t.music.title} lead={`${t.music.count(releases.length)} · ${t.music.platformsText}`} />
+      <section className="section section-tight">
+        <div className="container"><AlbumSpotlight t={t} lang={lang} /></div>
+      </section>
       {releases[0] && (
         <section className="section section-tight">
           <div className="container"><LatestRelease r={toView(releases[0], t)} t={t} /></div>

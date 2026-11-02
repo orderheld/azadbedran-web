@@ -14,6 +14,7 @@ import { manager, site, streamingPlatforms, telUrl, whatsappUrl } from '@/lib/si
 import type { Concert, NewsItem } from '@/lib/seed'
 import type { Video } from '@/lib/videos'
 import type { Release } from '@/lib/music'
+import { albumText, latestAlbumTrack, vegerin, youtubeUrl, type AlbumTrack } from '@/lib/album'
 
 type Base = { t: Dict; lang: Locale }
 
@@ -299,4 +300,47 @@ export function ArtistJsonLd({ upcoming, releases, lang, description }: { upcomi
     ],
   }
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, '\\u003c') }} />
+}
+
+const creditLine = (tr: AlbumTrack, lang: Locale) => tr.credits.map((c) => `${albumText[lang].roles[c.role]}: ${c.name}`).join(' · ')
+
+// Neues Album „Vegerîn“: neuestes Lied als Video, darunter alle bisher erschienenen Lieder mit YouTube-Link
+export function AlbumSpotlight({ t, lang }: Base) {
+  const a = albumText[lang]
+  const latest = latestAlbumTrack()
+  const by = latest.credits.find((c) => c.role === 'both' || c.role === 'lyrics')?.name ?? 'Azad Bedran'
+  return (
+    <div className="vegerin" id="vegerin">
+      <div className="vegerin-media">
+        <YouTubeLite id={latest.youtube} title={`Azad Bedran – ${latest.title}`} playLabel={a.play} poster={`/images/vegerin/${latest.youtube}.jpg`} />
+      </div>
+      <div className="vegerin-body">
+        <p className="eyebrow">{a.kicker} · {vegerin.year} <span className="pill">{a.newSingle}: {latest.title}</span></p>
+        <h2 className="display xl">{vegerin.title}</h2>
+        <p className="lead">{a.lead(latest.title, latest.n, by)}</p>
+        <h3 className="vegerin-sub">{a.released} · {vegerin.tracks.length}</h3>
+        <ol className="vegerin-tracks">
+          {[...vegerin.tracks].sort((x, y) => x.n - y.n).map((tr) => (
+            <li key={tr.n} className={tr === latest ? 'is-new' : undefined}>
+              <a href={youtubeUrl(tr.youtube)} target="_blank" rel="noopener" aria-label={`${a.watch}: ${tr.title}`}>
+                <span className="vt-n">{String(tr.n).padStart(2, '0')}</span>
+                <span className="vt-main">
+                  <span className="vt-title">{tr.title}</span>
+                  <span className="vt-credit">{creditLine(tr, lang)}</span>
+                </span>
+                <span className="vt-side">
+                  <time dateTime={tr.date}>{formatDate(tr.date, lang)}</time>
+                  <span className="vt-yt"><BrandIcon id="youtube" size={16} mono /> <ArrowUpRight size={14} /></span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
+        <div className="btn-row">
+          <a className="btn btn-primary" href={youtubeUrl(latest.youtube)} target="_blank" rel="noopener"><BrandIcon id="youtube" size={18} mono /> {a.watch}</a>
+          <a className="btn btn-ghost" href={site.youtubeSubscribeUrl} target="_blank" rel="noopener">{t.videos.subscribe} <ArrowUpRight size={14} /></a>
+        </div>
+      </div>
+    </div>
+  )
 }

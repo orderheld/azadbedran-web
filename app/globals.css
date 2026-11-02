@@ -183,6 +183,33 @@ h3 { font-family: var(--sans); font-weight: 700; color: var(--cream); margin: 0;
 .latest-meta { color: var(--cream); font-weight: 600; margin: 18px 0 4px; }
 @media (max-width: 860px) { .latest { grid-template-columns: 1fr; } .latest-cover { max-width: 460px; } }
 
+/* Neues Album „Vegerîn“ */
+.vegerin { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+.vegerin-media { position: sticky; top: calc(var(--header) + 24px); }
+.vegerin-media .yt-play { left: 14%; top: 80%; }
+.vegerin-media .yt { box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.85); }
+.vegerin-body .display.xl { margin: 0; }
+.vegerin-body .lead { margin: 16px 0 0; }
+.vegerin-sub { font-family: var(--sans); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin: 32px 0 0; }
+.vegerin-tracks { list-style: none; margin: 14px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.vegerin-tracks li { border-bottom: 1px solid var(--line); }
+.vegerin-tracks a { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; align-items: center; gap: 14px; padding: 14px 4px; transition: color 0.3s, background 0.3s; }
+.vegerin-tracks a:hover { color: var(--glow); background: rgba(243, 230, 211, 0.03); }
+.vt-n { font-variant-numeric: tabular-nums; color: var(--muted); font-weight: 700; font-size: 0.9rem; }
+.vt-main { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.vt-title { font-weight: 700; font-size: 1.08rem; color: var(--cream); }
+.vt-credit { font-size: 0.86rem; color: var(--muted); }
+.vt-side { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; font-size: 0.8rem; color: var(--muted); white-space: nowrap; }
+.vt-yt { display: inline-flex; align-items: center; gap: 4px; color: var(--amber); }
+.vegerin-tracks li.is-new .vt-n, .vegerin-tracks li.is-new .vt-title { color: var(--amber); }
+@media (max-width: 960px) { .vegerin { grid-template-columns: 1fr; } .vegerin-media { position: static; } }
+@media (max-width: 560px) {
+  .vegerin-tracks a { grid-template-columns: 30px minmax(0, 1fr) auto; gap: 10px; }
+  .vt-side time { display: none; }
+  .vegerin .btn-row { flex-direction: column; align-items: stretch; }
+  .vegerin .btn-row > * { white-space: normal; text-align: center; }
+}
+
 /* Cover-Fallback (falls ein Plattform-Cover nicht lädt) */
 .cover-fallback { container-type: inline-size; overflow: hidden; display: flex; align-items: flex-end; width: 100%; height: 100%; padding: 14%; background: radial-gradient(80% 80% at 70% 20%, rgba(224, 163, 94, 0.45), transparent 60%), linear-gradient(160deg, var(--bronze), var(--bg-3)); }
 .cover-fallback span { font-family: var(--display); font-weight: 700; font-variation-settings: 'opsz' 11; font-size: clamp(0.8rem, 13cqi, 1.6rem); color: var(--cream); line-height: 1.1; overflow-wrap: anywhere; hyphens: auto; }
