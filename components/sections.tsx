@@ -308,7 +308,6 @@ const creditLine = (tr: AlbumTrack, lang: Locale) => tr.credits.map((c) => `${al
 export function AlbumSpotlight({ t, lang }: Base) {
   const a = albumText[lang]
   const latest = latestAlbumTrack()
-  const by = latest.credits.find((c) => c.role === 'both' || c.role === 'lyrics')?.name ?? 'Azad Bedran'
   return (
     <div className="vegerin" id="vegerin">
       <div className="vegerin-media">
@@ -317,7 +316,8 @@ export function AlbumSpotlight({ t, lang }: Base) {
       <div className="vegerin-body">
         <p className="eyebrow">{a.kicker} · {vegerin.year} <span className="pill">{a.newSingle}: {latest.title}</span></p>
         <h2 className="display xl">{vegerin.title}</h2>
-        <p className="lead">{a.lead(latest.title, latest.n, by)}</p>
+        <p className="lead">{a.lead(latest.title, latest.n)}</p>
+        <p className="vt-credit">{creditLine(latest, lang)}</p>
         <h3 className="vegerin-sub">{a.released} · {vegerin.tracks.length}</h3>
         <ol className="vegerin-tracks">
           {[...vegerin.tracks].sort((x, y) => x.n - y.n).map((tr) => (

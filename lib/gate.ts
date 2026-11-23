@@ -1,7 +1,7 @@
-// Passwortschutz während der Vorschauphase. Passwort über die Env-Variable SITE_PASSWORD änderbar.
-// Zum Livegang: GATE_DISABLED=1 in Vercel setzen.
+// Passwortschutz („Coming soon“). Seit dem Livegang (23.11.2026) standardmässig AUS.
+// Nur wieder einschalten, wenn nötig: SITE_GATE=1 in Vercel setzen (Passwort über SITE_PASSWORD).
 export const GATE_COOKIE = 'ab_access'
-export const gateEnabled = () => process.env.GATE_DISABLED !== '1'
+export const gateEnabled = () => process.env.SITE_GATE === '1' && process.env.GATE_DISABLED !== '1'
 const password = () => process.env.SITE_PASSWORD || '121212'
 
 export async function accessToken(pw = password()) {

@@ -29,7 +29,7 @@ export default async function Settings({ searchParams }: PageProps<'/admin/einst
     { key: 'ADMIN_SECRET', ok: !!process.env.ADMIN_SECRET, text: 'Optional: zusätzlicher geheimer Schlüssel für die Anmeldung', optional: true },
     { key: 'NEXT_PUBLIC_SITE_URL', ok: !!process.env.NEXT_PUBLIC_SITE_URL, text: `Adresse der Website (jetzt: ${site.url})` },
     { key: 'GOOGLE_SITE_VERIFICATION', ok: !!process.env.GOOGLE_SITE_VERIFICATION, text: 'Optional: Bestätigungscode der Google Search Console', optional: true },
-    { key: 'GATE_DISABLED', ok: !gateEnabled(), text: gateEnabled() ? 'Vorschau-Passwort ist aktiv. Zum Livegang GATE_DISABLED=1 setzen.' : 'Website ist öffentlich' },
+    { key: 'SITE_GATE', ok: !gateEnabled(), text: gateEnabled() ? 'Vorschau-Passwort ist aktiv (SITE_GATE=1). Zum Freischalten SITE_GATE entfernen.' : 'Website ist öffentlich' },
   ]
   return (
     <>

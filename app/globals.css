@@ -127,6 +127,8 @@ h3 { font-family: var(--sans); font-weight: 700; color: var(--cream); margin: 0;
 .hero-inner > *:nth-child(3) { animation-delay: 0.2s; }
 .hero-inner > *:nth-child(n + 4) { animation-delay: 0.3s; }
 @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+/* Kicker über dem Foto: dunkle, leicht unscharfe Unterlage, damit er auf Gesicht/Bart lesbar bleibt */
+.hero-kicker { display: inline-flex; width: fit-content; padding: 7px 14px; border-radius: 999px; background: rgba(15, 10, 7, 0.62); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(224, 163, 94, 0.28); color: #f0bd7e; text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6); }
 .hero-logo { margin: 0; color: var(--cream); }
 .hero-logo svg { width: min(500px, 82vw); height: auto; display: block; filter: drop-shadow(0 4px 30px rgba(0, 0, 0, 0.45)); }
 .hero .rule { margin: 26px 0 22px; }
