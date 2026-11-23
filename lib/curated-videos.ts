@@ -1,11 +1,21 @@
 export type CuratedVideo = { id: string; title: string; date: string | null; views: number | null; live?: boolean }
 
-// Videos vom offiziellen Kanal (geprüft am 29.10.2026 bzw. 02.11.2026: Titel, Kanal und Datum je Video)
+// Videos vom offiziellen Kanal (geprüft am 29.10.2026, 02.11.2026 und 23.11.2026: Titel, Kanal und Datum je Video)
 export const curatedVideos: CuratedVideo[] = [
+  { id: 'FZFv-2Eh9W8', title: 'Gulperîya Zozanan', date: '2026-11-20', views: null },
+  { id: 'IGFWct1t-LI', title: 'Vegerîn (Cano)', date: '2026-11-10', views: null },
   { id: 'RAB_GAXsMwQ', title: 'Kes pê Nizane', date: '2026-11-02', views: null },
   { id: 'acAZYC43d3g', title: 'Tu Gulaminî', date: '2026-10-23', views: null },
   { id: '3kyIIcoxAKE', title: 'Ax Welat', date: '2026-10-16', views: null },
   { id: 'oB18IGVYEvM', title: 'Şam Şekire', date: '2026-10-08', views: null },
+  { id: 'Op67iv77Ffc', title: 'Tu Çirokek Bêhempa (bi Süleyman re, ji bo Hozan Serhad)', date: '2026-09-04', views: null },
+  { id: 'R2uMxAlkSvs', title: 'Aç Kaldık Özgürlüğe', date: '2026-08-19', views: null },
+  { id: 'UaVOTPTiurw', title: 'Çavênte Welatêmine (Konser)', date: '2026-07-17', views: null, live: true },
+  { id: 'cxWxhJ5cC_s', title: 'Ez Dînim (Live)', date: '2026-06-12', views: null, live: true },
+  { id: 'onPsNmP94Vo', title: 'Diyarbekir Konser (Live)', date: '2026-05-25', views: null, live: true },
+  { id: 'IXFmKygpcUc', title: 'Bêhna Bihuşt (Konser)', date: '2026-05-08', views: null, live: true },
+  { id: 'MUDwGKZk6gc', title: 'Buk û Zava yê me', date: '2026-04-15', views: null },
+  { id: '90K9fYXwXK4', title: 'Amedspor Geliyor', date: '2026-03-26', views: null },
   { id: 'VZn3rkqh3fo', title: 'Evîna Azad (Konser)', date: '2026-02-27', views: null, live: true },
   { id: 'QjVfjl1WZSQ', title: 'Aşk Amedspor', date: '2026-02-19', views: null },
   { id: 'X3v4Kf8eqrU', title: 'Ka Berxêmin', date: '2025-10-22', views: null },

@@ -28,7 +28,11 @@ export async function proxy(request: NextRequest) {
     return NextResponse.rewrite(url)
   }
 
-  if (match || pathname.startsWith('/soon')) return
+  // Seite ist öffentlich: alte „Coming soon“-Links auf die echte Startseite umleiten
+  const soon = pathname.match(/^\/soon(?:\/(ku|tr|en|ru))?/)
+  if (soon && !gateEnabled()) return NextResponse.redirect(new URL(`/${soon[1] ?? 'ku'}`, request.url), 308)
+
+  if (match || soon) return
   // Erste Sprache ist immer Kurmancî
   request.nextUrl.pathname = `/${locales[0]}${pathname === '/' ? '' : pathname}`
   return NextResponse.redirect(request.nextUrl)
