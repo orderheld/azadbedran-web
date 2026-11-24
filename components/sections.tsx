@@ -305,13 +305,13 @@ export function ArtistJsonLd({ upcoming, releases, lang, description }: { upcomi
 const creditLine = (tr: AlbumTrack, lang: Locale) => tr.credits.map((c) => `${albumText[lang].roles[c.role]}: ${c.name}`).join(' · ')
 
 // Neues Album „Vegerîn“: neuestes Lied als Video, darunter alle bisher erschienenen Lieder mit YouTube-Link
-export function AlbumSpotlight({ t, lang }: Base) {
+export function AlbumSpotlight({ t, lang, eager }: Base & { eager?: boolean }) {
   const a = albumText[lang]
   const latest = latestAlbumTrack()
   return (
     <div className="vegerin" id="vegerin">
       <div className="vegerin-media">
-        <YouTubeLite id={latest.youtube} title={`Azad Bedran – ${latest.title}`} playLabel={a.play} poster={`/images/vegerin/${latest.youtube}.jpg`} />
+        <YouTubeLite id={latest.youtube} title={`Azad Bedran – ${latest.title}`} playLabel={a.play} poster={`/images/vegerin/${latest.youtube}.jpg`} eager={eager} />
       </div>
       <div className="vegerin-body">
         <p className="eyebrow">{a.kicker} · {vegerin.year} <span className="pill">{a.newSingle}: {latest.title}</span></p>
@@ -322,7 +322,7 @@ export function AlbumSpotlight({ t, lang }: Base) {
         <ol className="vegerin-tracks">
           {[...vegerin.tracks].sort((x, y) => x.n - y.n).map((tr) => (
             <li key={tr.n} className={tr === latest ? 'is-new' : undefined}>
-              <a href={youtubeUrl(tr.youtube)} target="_blank" rel="noopener" aria-label={`${a.watch}: ${tr.title}`}>
+              <a href={youtubeUrl(tr.youtube)} target="_blank" rel="noopener" title={`${a.watch}: ${tr.title}`}>
                 <span className="vt-n">{String(tr.n).padStart(2, '0')}</span>
                 <span className="vt-main">
                   <span className="vt-title">{tr.title}</span>

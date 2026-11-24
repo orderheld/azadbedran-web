@@ -562,3 +562,6 @@ html.menu-open .mini-player, html.menu-open .show-pop { display: none; }
 .link-arrow { display: inline-flex; align-items: center; min-height: 40px; color: var(--muted); font-weight: 600; transition: color 0.3s; }
 .link-arrow:hover { color: var(--cream); }
 .footer-bottom a { display: inline-flex; align-items: center; min-height: 36px; }
+/* Tap-Flächen im Footer: kurze Links (z. B. „X“, „Webnova“) auf dem Handy gut treffbar, ohne die Optik zu ändern */
+.footer-cols li > a { min-width: 44px; }
+.footer-bottom .credit a { display: inline-block; padding-block: 12px; margin-block: -12px; text-decoration: underline; text-decoration-color: rgba(224, 163, 94, 0.45); text-underline-offset: 3px; }
