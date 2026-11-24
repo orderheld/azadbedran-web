@@ -54,7 +54,6 @@ export const gallery = [
   { src: '/images/azad-live-stage.jpg', w: 463, h: 662 },
   { src: '/images/azad-portrait-close.jpg', w: 1290, h: 1500 },
   { src: '/images/azad-keffiyeh.jpg', w: 462, h: 663 },
-  { src: '/images/azad-warm.jpg', w: 1500, h: 945 },
   { src: '/images/azad-leather.jpg', w: 447, h: 447 },
   { src: '/images/azad-blazer.jpg', w: 399, h: 501 },
 ]

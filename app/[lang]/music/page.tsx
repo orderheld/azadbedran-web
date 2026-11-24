@@ -32,7 +32,7 @@ export default async function MusicPage({ params }: PageProps<'/[lang]/music'>) 
     <main>
       <PageHero kicker={t.music.kicker} title={t.music.title} lead={`${t.music.count(releases.length)} · ${t.music.platformsText}`} />
       <section className="section section-tight">
-        <div className="container"><AlbumSpotlight t={t} lang={lang} /></div>
+        <div className="container"><AlbumSpotlight t={t} lang={lang} eager /></div>
       </section>
       {releases[0] && (
         <section className="section section-tight">

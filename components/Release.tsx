@@ -30,7 +30,7 @@ export function CoverImage({ art, title, sizes = '(max-width: 720px) 50vw, 25vw'
     <img
       ref={ref}
       src={coverUrl(art, 600)}
-      srcSet={`${coverUrl(art, 300)} 300w, ${coverUrl(art, 600)} 600w, ${coverUrl(art, 1000)} 1000w`}
+      srcSet={`${coverUrl(art, 300)} 300w, ${coverUrl(art, 450)} 450w, ${coverUrl(art, 600)} 600w, ${coverUrl(art, 800)} 800w, ${coverUrl(art, 1000)} 1000w`}
       sizes={sizes}
       alt={title}
       width={600}

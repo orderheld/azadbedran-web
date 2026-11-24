@@ -37,7 +37,7 @@ async function isShort(id: string) {
 }
 
 export const cleanTitle = (t: string) =>
-  t.replace(/^azad\s+bedran\s*[-–|:]\s*/i, '').replace(/\s*[-–|]\s*azad\s+bedran$/i, '').replace(/\s*#\S+/g, '').trim()
+  t.replace(/^azad\s+bedran\s*[-–|:]\s*/i, '').replace(/\s*[-–|]\s*azad\s+bedran$/i, '').replace(/\s*#\S+/g, '').replace(/\(\s+/g, '(').replace(/\s+\)/g, ')').replace(/\s{2,}/g, ' ').trim()
 
 // Neueste Videos direkt vom offiziellen Kanal (RSS, max. 15), ohne Shorts
 export async function getVideos(): Promise<{ videos: Video[]; live: boolean; liveIds: Set<string> }> {
