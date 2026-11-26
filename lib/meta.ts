@@ -8,8 +8,10 @@ type Image = { url: string; width?: number; height?: number; alt?: string }
 
 export function pageMeta(lang: Locale, path: string, title: string, description?: string, image?: Image, type: 'website' | 'article' = 'website'): Metadata {
   const images = [image ?? ogImage(lang)]
+  // Kein doppeltes „Azad Bedran“, wenn der Titel den Namen schon enthält (z. B. News)
+  const full = title.includes(site.name) ? title : `${title} – ${site.name}`
   return {
-    title,
+    title: { absolute: full },
     description,
     alternates: {
       canonical: `/${lang}${path}`,
@@ -18,13 +20,13 @@ export function pageMeta(lang: Locale, path: string, title: string, description?
     openGraph: {
       type,
       siteName: site.name,
-      title: `${title} – ${site.name}`,
+      title: full,
       description,
       url: `/${lang}${path}`,
       locale: ogLocale[lang],
       alternateLocale: locales.filter((l) => l !== lang).map((l) => ogLocale[l]),
       images,
     },
-    twitter: { card: 'summary_large_image', site: '@azadbedran', title: `${title} – ${site.name}`, description, images: images.map((i) => i.url) },
+    twitter: { card: 'summary_large_image', site: '@azadbedran', creator: '@azadbedran', title: full, description, images: images.map((i) => i.url) },
   }
 }

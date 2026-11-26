@@ -2,7 +2,8 @@
 
 export const site = {
   name: 'Azad Bedran',
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://azadbedran.com',
+  // Hauptadresse ist www (azadbedran.com leitet per 308 dorthin um). Canonical, hreflang, og:url und Sitemap müssen direkt darauf zeigen.
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.azadbedran.com').replace('://azadbedran.com', '://www.azadbedran.com').replace(/\/$/, ''),
 
   deezerArtistId: '10396480',
   appleArtistId: '1116072473',

@@ -13,6 +13,8 @@ const assetCache = [{ key: 'Cache-Control', value: 'public, max-age=86400, stale
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Gestaltete 404-Seite auch für Adressen, die zu keiner Route passen
+  experimental: { globalNotFound: true },
   // Schema für „Datenbank einrichten“ im Admin-Bereich mitliefern
   outputFileTracingIncludes: { '/admin/**': ['./db/schema.sql'] },
   images: {

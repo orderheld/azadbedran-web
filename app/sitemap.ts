@@ -14,13 +14,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const latestNews = news[0]?.date
   type P = { path: (l: (typeof locales)[number]) => string; modified?: string }
   const paths: P[] = gated ? [{ path: (l) => href(l) }] : [
-    ...[undefined, ...pages].map((p): P => ({ path: (l) => href(l, p), modified: p === 'news' ? latestNews : undefined })),
+    ...[undefined, ...pages].map((p): P => ({ path: (l) => href(l, p), modified: p === 'news' || p === undefined ? latestNews : undefined })),
     ...news.map((n): P => ({ path: (l) => `${href(l, 'news')}/${n.id}`, modified: n.date })),
   ]
   return paths.flatMap(({ path, modified }) =>
     locales.map((l) => ({
       url: `${site.url}${path(l)}`,
-      lastModified: modified ? new Date(modified) : new Date(),
+      // Nur echte Änderungsdaten angeben (Google ignoriert sonst lastmod, wenn es bei jedem Abruf „jetzt“ ist)
+      ...(modified ? { lastModified: new Date(modified) } : {}),
       changeFrequency: 'weekly' as const,
       priority: path(l) === href(l) ? 1 : 0.7,
       alternates: { languages: { ...Object.fromEntries(locales.map((x) => [x, `${site.url}${path(x)}`])), 'x-default': `${site.url}${path('ku')}` } },
