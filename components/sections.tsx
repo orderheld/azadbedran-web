@@ -293,7 +293,6 @@ export function ArtistJsonLd({ upcoming, releases, lang, description }: { upcomi
           ...(c.poster ? { image: [abs(c.poster)] } : {}),
           location: { '@type': 'Place', name: c.venue ?? c.city, address: { '@type': 'PostalAddress', streetAddress: c.address ?? undefined, addressLocality: c.city, addressCountry: c.country } },
           performer: { '@type': 'MusicGroup', ...artist, name: site.name },
-          organizer: { '@type': 'Organization', name: site.name, url: site.url },
           ...(c.ticketUrl ? { offers: { '@type': 'Offer', url: c.ticketUrl, availability: c.soldOut ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock' } } : {}),
         })),
       },

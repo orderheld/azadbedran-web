@@ -88,7 +88,7 @@ export default async function Dashboard({ searchParams }: PageProps<'/admin'>) {
           <li className={hasDb() ? 'ok' : 'warn'}>Datenbank {hasDb() ? 'verbunden' : 'nicht verbunden'}</li>
           <li className={adminConfigured() ? 'ok' : 'warn'}>Admin-Passwort {adminConfigured() ? 'gesetzt' : 'fehlt'}</li>
           <li className={gateEnabled() ? 'warn' : 'ok'}>Website {gateEnabled() ? 'im Vorschau-Modus (Passwort)' : 'öffentlich'}</li>
-          <li className={process.env.NEXT_PUBLIC_SITE_URL ? 'ok' : 'warn'}>Domain {process.env.NEXT_PUBLIC_SITE_URL ?? 'nicht gesetzt (Standard azadbedran.com)'}</li>
+          <li className={process.env.NEXT_PUBLIC_SITE_URL ? 'ok' : 'warn'}>Domain {process.env.NEXT_PUBLIC_SITE_URL ?? 'nicht gesetzt (Standard www.azadbedran.com)'}</li>
         </ul>
       </Card>
     </>
