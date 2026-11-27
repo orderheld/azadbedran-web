@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation'
 import { PageHero } from '@/components/sections'
 import { isLocale } from '@/lib/i18n'
-import { privacy } from '@/lib/legal'
+import { privacy, legalMeta } from '@/lib/legal'
+import { pageMeta } from '@/lib/meta'
 import { loadDict } from '@/lib/content'
 
 export default async function Page({ params }: PageProps<'/[lang]/datenschutz'>) {
@@ -27,5 +28,8 @@ export default async function Page({ params }: PageProps<'/[lang]/datenschutz'>)
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/datenschutz'>) {
   const { lang } = await params
-  return { title: isLocale(lang) ? (await loadDict(lang)).footer.privacy : '', robots: { index: false } }
+  if (!isLocale(lang)) return {}
+  const t = await loadDict(lang)
+  // Eigene Beschreibung + kanonisch auf sich selbst (nicht auf die Startseite), weiterhin nicht indexiert
+  return { ...pageMeta(lang, '/datenschutz', t.footer.privacy, legalMeta.privacy[lang]), robots: { index: false, follow: true } }
 }

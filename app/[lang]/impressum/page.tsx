@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation'
 import { PageHero } from '@/components/sections'
 import { isLocale } from '@/lib/i18n'
-import { imprint } from '@/lib/legal'
+import { imprint, legalMeta } from '@/lib/legal'
+import { pageMeta } from '@/lib/meta'
 import { loadDict } from '@/lib/content'
 
 export default async function Page({ params }: PageProps<'/[lang]/impressum'>) {
@@ -27,5 +28,8 @@ export default async function Page({ params }: PageProps<'/[lang]/impressum'>) {
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/impressum'>) {
   const { lang } = await params
-  return { title: isLocale(lang) ? (await loadDict(lang)).footer.imprint : '', robots: { index: false } }
+  if (!isLocale(lang)) return {}
+  const t = await loadDict(lang)
+  // Eigene Beschreibung + kanonisch auf sich selbst (nicht auf die Startseite), weiterhin nicht indexiert
+  return { ...pageMeta(lang, '/impressum', t.footer.imprint, legalMeta.imprint[lang]), robots: { index: false, follow: true } }
 }

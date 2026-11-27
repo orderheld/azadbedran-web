@@ -21,6 +21,7 @@ export default async function ContactPage({ params }: PageProps<'/[lang]/contact
       <PageHero kicker={t.contact.kicker} title={t.contact.title} lead={t.contact.text} image="/images/azad-warm.jpg" position="50% 30%" />
       <section className="section section-tight">
         <div className="container contact-grid">
+          <h2 className="sr-only">{t.contact.role}</h2>
           <ManagerCard t={t} />
           <SocialList t={t} />
         </div>

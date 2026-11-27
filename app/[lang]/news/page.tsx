@@ -23,7 +23,7 @@ export default async function NewsPage({ params }: PageProps<'/[lang]/news'>) {
     <main>
       <PageHero kicker={t.news.kicker} title={t.news.title} />
       <section className="section section-tight">
-        <div className="container"><NewsGrid news={news} t={t} lang={lang} /></div>
+        <div className="container"><h2 className="sr-only">{t.news.title}</h2><NewsGrid news={news} t={t} lang={lang} /></div>
       </section>
     </main>
   )

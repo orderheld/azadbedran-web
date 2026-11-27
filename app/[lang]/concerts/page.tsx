@@ -32,6 +32,7 @@ export default async function ConcertsPage({ params }: PageProps<'/[lang]/concer
         <div className="container">
           {upcoming.length ? (
             <>
+              <h2 className="sr-only">{t.concerts.next}</h2>
               <NextShow c={upcoming[0]} t={t} lang={lang} />
               {upcoming.length > 1 && (
                 <>

@@ -61,3 +61,19 @@ export const privacy: Record<Locale, Block[]> = {
     { h: 'Контакт', p: [`По вопросам: ${manager.name}, ${manager.phone}`] },
   ],
 }
+
+// Eigene Meta-Beschreibungen für die (nicht indexierten) Rechtsseiten, damit sie nicht die Startseite doppeln
+export const legalMeta: Record<'imprint' | 'privacy', Record<Locale, string>> = {
+  imprint: {
+    ku: 'Impressum ya malpera fermî ya Azad Bedran: berpirsiyarê naverokê, rêveberî û booking bi Ozan Kızılkar re, mafên wêne û muzîkê.',
+    tr: 'Azad Bedran resmî web sitesinin künyesi: içerikten sorumlu kişi, menajer Ozan Kızılkar ile booking, fotoğraf ve müzik hakları.',
+    en: 'Imprint of the official Azad Bedran website: who is responsible for content, booking via manager Ozan Kızılkar, photo and music rights.',
+    ru: 'Выходные данные официального сайта Азада Бедрана: ответственный за содержание, букинг через менеджера Озана Кызылкара, права на фото и музыку.',
+  },
+  privacy: {
+    ku: 'Nepenî li ser malpera Azad Bedran: statîstîka bê cookie, bê IP, vîdeoyên YouTube tenê piştî klîkê û mafên te.',
+    tr: 'Azad Bedran web sitesinde gizlilik: çerezsiz ve IP’siz istatistik, YouTube videoları yalnızca tıklamadan sonra, haklarınız.',
+    en: 'Privacy on the Azad Bedran website: cookie-free statistics without IP addresses, YouTube only after a click, your rights.',
+    ru: 'Конфиденциальность на сайте Азада Бедрана: статистика без cookie и IP, YouTube только после клика, ваши права.',
+  },
+}
